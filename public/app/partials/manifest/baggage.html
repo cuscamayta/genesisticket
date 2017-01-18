@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Manifiesto de equipaje <small></small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link" ng-click="back()" ng-hide="showblack" title="Volver"><i class="fa fa-arrow-left"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <div id="step-1" class="content" style="display: block;">
+                    <form class="form-horizontal form-label-left">
+                        <div class="form-group">
+                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateinit">Fecha <span class="required">*</span></label>
+                            <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                                <input type="text" id="dateinit" class="form-control has-feedback-left active" ngfocus order="1" ng-model="filter.dateinit"
+                                    validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                            </div>
+                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateend">Hasta <span class="required">*</span></label>
+                            <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                                <input type="text" id="dateend" class="form-control has-feedback-left active" ngfocus order="1" ng-model="filter.dateend"
+                                    validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                            </div>
+
+                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="idtravel">Itinerario</label>
+                            <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+                                <select id="idtravel" class="form-control" ng-options="travel.numberid for travel in listtravel" ng-model="selectedtravel"
+                                    required></select>
+                            </div>
+
+                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                <button type="button" class="btn btn-primary" ng-click="selectedtravelchange()" title="Generar manifiesto">Generar</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <div class="table-responsive">
+                                        <div ng-show="listschedule.length <= 0" class="alert-no-data">No existen datos para mostrar</div>
+                                        <table ng-show="listschedule.length > 0" class="table table-striped jambo_table bulk_action">
+                                            <thead class="headings">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Fecha</th>
+                                                    <th>Hora salida</th>
+                                                    <th>Hora llegada</th>
+                                                    <th>Detalle</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="even pointer" ng-repeat="schedule in listschedule" ng-class="{selectelement:scheduleselected.id==schedule.id}">
+                                                    <td>{{$index}}</td>
+                                                    <td>{{schedule.dateregister}}</td>
+                                                    <td>{{schedule.arrival}}</td>
+                                                    <td>{{schedule.departure}}</td>
+                                                    <td>{{schedule.detail}}</td>
+                                                    <td ng-click="scheduleselected(schedule)"><i class="fa fa-arrow-right" title="Generar"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div id="step-2" class="content" style="display: none;">
+                    <form class="form-horizontal form-label-left">
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead class="headings">
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Nro Licencia</th>
+                                                <th>Tipo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even pointer" ng-repeat="item in listdriver">
+                                                <td>{{item.Driver.fullName}}</td>
+                                                <td>{{item.Driver.numberid}}</td>
+                                                <td>{{item.drivertype}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped jambo_table bulk_action">
+                                            <thead class="headings">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Fecha</th>
+                                                    <th>Hora salida</th>
+                                                    <th>Hora llegada</th>
+                                                    <th>Nro asiento</th>
+                                                    <th>Cantidad equipaje</th>
+                                                    <th>Peso equipaje (kg)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="even pointer" ng-repeat="ticket in listticket" ng-class="{selectelement:ticketselected.id==ticket.id}">
+                                                    <td>{{$index}}</td>
+                                                    <td>{{ticket.Schedule.dateregister}}</td>
+                                                    <td>{{ticket.Schedule.arrival}}</td>
+                                                    <td>{{ticket.Schedule.departure}}</td>
+                                                    <td>{{ticket.number}}</td>
+                                                    <td>{{ticket.numberbaggage}}</td>
+                                                    <td>{{ticket.weightbaggage}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

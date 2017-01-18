@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Anular facturas <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <form class="form-horizontal form-label-left">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateinit">Desde <span class="required">*</span></label>
+                        <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                            <input type="text" id="dateinit" class="form-control has-feedback-left active" ngfocus order="1" ng-model="editschedule.dateinit"
+                                validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                        </div>
+
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateend">Hasta <span class="required">*</span></label>
+                        <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                            <input type="text" id="dateend" class="form-control has-feedback-left active" ngfocus order="1" ng-model="editschedule.dateend"
+                                validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <select id="idoffice" class="form-control" ng-options="office.title for office in listoffice" ng-model="selectedoffice" required></select>
+                        </div>
+
+                        <div class="col-md-1 col-sm-1 col-xs-12">
+                            <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="getsalebooks()" title="Obtener facturas">Buscar</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="table-responsive">
+                                    <div ng-show="listsalebook.length <= 0" class="alert-no-data">No existen datos para mostrar</div>
+                                    <table ng-show="listsalebook.length > 0" class="table table-striped jambo_table bulk_action">
+                                        <thead class="headings">
+                                            <tr>
+                                                <th>Fecha</th>
+                                                <th>Nro orden</th>
+                                                <th>Código control</th>
+                                                <th>Nro factura</th>
+                                                <th>Nro NIT</th>
+                                                <th>Nombre</th>
+                                                <th>Importe</th>
+                                                <th>Sucursal</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even pointer" ng-repeat="salebook in listsalebook" ng-class="{selectelement:salebookselected.id==salebook.id}">
+                                                <td>{{salebook.dateregister}}</td>
+                                                <td>{{salebook.numberorder}}</td>
+                                                <td>{{salebook.numbercontrol}}</td>
+                                                <td>{{salebook.numberinvoice}}</td>
+                                                <td>{{salebook.numberid}}</td>
+                                                <td>{{salebook.fullname}}</td>
+                                                <td>{{salebook.amountinvoice}}</td>
+                                                <td>{{salebook.Office.title}}</td>
+                                                <td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="salebookselected(salebook)"><i class="fa fa-trash-o" title="Anular factura"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modaldeletesalebook" class="modal fade bs-example-modal-sm" tabindex="-1" office="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Eliminar factura y venta</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+                <button type="button" class="btn btn-danger" ng-click="deletesalebook()" title="Eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

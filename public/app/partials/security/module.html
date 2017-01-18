@@ -1,0 +1,75 @@
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Módulos registrados</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead class="headings">
+                            <tr>
+                                <th>Descripción</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even pointer" ng-repeat="module in modules | paginate" ng-class="{selectelement:moduleselected.id==module.id}">
+                                <td>{{module.title}}</td>
+                                <td ng-click="selectedmodule(module,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+                                <td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selectedmodule(module,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <paginator></paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Registrar módulo</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form class="form-horizontal form-label-left">
+                    <p></p>
+                    <label for="title">Módulo <span class="required">*</span></label>
+                    <input type="text" id="title" class="form-control" ngfocus order="1" ng-model="editmodule.title" required>
+
+                    <label for="class">Clase <span class="required">*</span></label>
+                    <input type="text" id="class" class="form-control" ngfocus order="1" ng-model="editmodule.class" required
+                        ng-enter="savemodule()">
+
+                    <div class="ln_solid"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="button" class="btn btn-default" ng-click="newmodule()" title="Limpiar controles">Cancelar</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="savemodule()" title="Guardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modaldeletemodule" class="modal fade bs-example-modal-sm" tabindex="-1" module="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Eliminar módulo</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+                <button type="button" class="btn btn-danger" ng-click="deletemodule()" title="Eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

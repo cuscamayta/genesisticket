@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Páginas registrados</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead class="headings">
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Ruta</th>
+                                <th>Módulo</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even pointer" ng-repeat="page in pages | paginate" ng-class="{selectelement:pageselected.id==page.id}">
+                                <td>{{page.title}}</td>
+                                <td>{{page.path}}</td>
+                                <td>{{page.Module.title}}</td>
+                                <td ng-click="selectedpage(page,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+                                <td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selectedpage(page,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <paginator></paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Registrar página</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form class="form-horizontal form-label-left">
+                    <p></p>
+                    <label for="title">Descripción <span class="required">*</span></label>
+                    <input type="text" id="title" class="form-control" ngfocus order="1" ng-model="editpage.title" required>
+
+                    <label for="path">Ruta <span class="required">*</span></label>
+                    <input type="text" id="path" class="form-control" ngfocus order="1" ng-model="editpage.path" required>
+
+                    <p>
+                        <label for="idmodule">Módulo <span class="required">*</span></label>
+                        <select id="idmodule" class="form-control" ng-options="module.title for module in listmodule" ng-model="selectedmodule"
+                            required ng-enter="savepage()">                            
+                        </select>
+                    </p>
+
+                    <div class="ln_solid"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="button" class="btn btn-default" ng-click="newpage()" title="Limpiar controles">Cancelar</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="savepage()" title="Guardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modaldeletepage" class="modal fade bs-example-modal-sm" tabindex="-1" page="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Eliminar página</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+                <button type="button" class="btn btn-danger" ng-click="deletepage()" title="Eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

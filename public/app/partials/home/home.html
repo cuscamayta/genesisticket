@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="section">
+		<div class="row">
+			<div class="x_content">
+				<div class="table-responsive">
+					<table class="table table-striped jambo_table bulk_action" style="background-color: #fff">
+						<thead class="headings">
+							<tr>
+								<th>Fecha</th>
+								<th>Hora salida</th>
+								<th>Hora llegada</th>
+								<th>Precio Min</th>
+								<th>Precio Max</th>
+								<th>Bus</th>
+								<th>Itinerario</th>
+								<th>Detalle</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even pointer" ng-repeat="schedule in schedules | paginate" ng-class="{selectelement:scheduleselected.id==schedule.id}">
+								<td>{{schedule.dateregister}}</td>
+								<td>{{schedule.arrival}}</td>
+								<td>{{schedule.departure}}</td>
+								<td>{{schedule.pricemin}}</td>
+								<td>{{schedule.pricemax}}</td>
+								<td>{{schedule.Bus.numberid}}</td>
+								<td>{{schedule.Travel.numberid}}</td>
+								<td>{{schedule.detail}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

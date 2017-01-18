@@ -1,0 +1,97 @@
+<div class="row">
+	<div class="col-md-6 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Sucursales registrados</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="table-responsive">
+					<table class="table table-striped jambo_table bulk_action">
+						<thead class="headings">
+							<tr>
+								<th>#</th>
+								<th>Sucursal</th>
+								<th>Teléfono</th>
+								<th>Dirección</th>								
+								<th>Origen</th>
+								<th>Detalles</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even pointer" ng-repeat="office in offices | paginate" ng-class="{selectelement:officeselected.id==office.id}">
+								<td>{{$index}}</td>
+								<td>{{office.title}}</td>
+								<td>{{office.phone}}</td>
+								<td>{{office.address}}</td>
+								<td>{{office.Destination.title}}</td>
+								<td>{{office.detail}}</td>
+								<td ng-click="selectedoffice(office,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+								<td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selectedoffice(office,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<paginator></paginator>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Registrar sucursal</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<form class="form-horizontal form-label-left">
+					<p></p>
+					<label for="title">Nombre <span class="required">*</span></label>
+					<input type="text" id="title" class="form-control" ngfocus order="1" ng-model="editoffice.title" validate="text-number" required>
+
+					<label for="phone">Telefono <span class="required">*</span></label>
+					<input type="text" id="phone" class="form-control" ngfocus ng-model="editoffice.phone" validate="telephone-number" required>
+
+					<label for="address">Direccion <span class="required">*</span></label>
+					<input type="text" id="address" class="form-control" ngfocus ng-model="editoffice.address" validate="text-number" required>
+
+					<label for="detail">Detalles </label>
+					<input type="text" id="detail" class="form-control" ngfocus ng-model="editoffice.detail" validate="text-number">
+
+					<p>
+						<label for="iddestination">Origen <span class="required">*</span></label>
+						<select id="iddestination" class="form-control" ng-options="destination.title for destination in listdestination" ng-model="selecteddestination"
+							required ng-enter="saveoffice()">                            
+                        </select>
+					</p>
+
+					<div class="ln_solid"></div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<button type="button" class="btn btn-default" ng-click="newoffice()" title="Limpiar controles">Cancelar</button>
+						<button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="saveoffice()" title="Guardar">Guardar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modaldeleteoffice" class="modal fade bs-example-modal-sm" tabindex="-1" office="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Eliminar sucursal</h4>
+			</div>
+			<div class="modal-body">
+				<p>¿Esta seguro de eliminar el registro?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+				<button type="button" class="btn btn-danger" ng-click="deleteoffice()" title="Eliminar">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>

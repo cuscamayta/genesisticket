@@ -1,0 +1,123 @@
+<div class="row">
+	<div class="col-md-12 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Libros de orden registrados</h2>
+				<button type="button" class="btn btn-default pull-right btnborderless" data-toggle="modal" data-target=".bs-example-modal-lg"
+					ng-click="neworderbook()" title="Nuevo registro"><i class="fa fa-plus-square"></i> Nuevo</button>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="table-responsive">
+					<table class="table table-striped jambo_table bulk_action">
+						<thead class="headings">
+							<tr>
+								<th>#</th>
+								<th>Sucursal</th>
+								<th>Nro Orden</th>
+								<th>Fecha de emisión</th>
+								<th>Límite emisión</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even pointer" ng-repeat="orderbook in orderbooks | paginate" ng-class="{selectelement:orderbookselected.id==orderbook.id}">
+								<td>{{$index}}</td>
+								<td>{{orderbook.Office.title}}</td>
+								<td>{{orderbook.numberorder}}</td>
+								<td>{{orderbook.dateofissue}}</td>
+								<td>{{orderbook.deadline}}</td>
+								<td data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="selectedorderbook(orderbook,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+								<td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selectedorderbook(orderbook,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<paginator></paginator>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modaleditorderbook" class="modal fade bs-example-modal-lg" tabindex="-1" office="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Registrar libro de orden</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal form-label-left">				
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="numberorder">Nro de orden <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<input type="text" id="numberorder" class="form-control" ngfocus ng-model="editorderbook.numberorder" validate="number" required>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="dateofissue">Fecha emisión <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<input type="text" id="dateofissue" class="form-control date-picker" ngfocus ng-model="editorderbook.dateofissue" validate="date"
+							required data-inputmask="'mask': '99/99/9999'">
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="deadline">Fecha límite <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<input type="text" id="deadline" class="form-control date-picker" ngfocus ng-model="editorderbook.deadline" validate="date"
+							required data-inputmask="'mask': '99/99/9999'">
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="idoffice">Sucursal <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<select id="idoffice" class="form-control" ng-options="office.title for office in listoffice" ng-model="selectedoffice" required>                            
+                        </select>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="type">Tipo <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<select id="type" class="form-control" required ng-enter="saveorderbook()">							
+								<option value="1">Electronica</option>
+							</select>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="status">Estado <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<select id="status" class="form-control" required>
+								<option value="" disabled selected>Elija un estado</option>
+								<option value="1">Disponible</option>
+								<option value="2">En uso</option>
+								<option value="3">Lleno</option>
+							</select>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="controlkey">Llave de control <span class="required">*</span></label>
+					<div class="col-md-10 col-sm-10 col-xs-12 form-group has-feedback">
+						<textarea id="controlkey" class="form-control" ngfocus ng-model="editorderbook.controlkey" required rows="2"></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Limpiar controles y cerrar">Cancelar</button>
+				<button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="saveorderbook()" title="Guardar">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modaldeleteorderbook" class="modal fade bs-example-modal-sm" tabindex="-1" office="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Eliminar libro de orden</h4>
+			</div>
+			<div class="modal-body">
+				<p>¿Esta seguro de eliminar el registro?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+				<button type="button" class="btn btn-danger" ng-click="deleteorderbook()" title="Eliminar">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>

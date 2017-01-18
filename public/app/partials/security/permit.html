@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Permisos registrados</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead class="headings">
+                            <tr>
+                                <th>Rol</th>
+                                <th>Página</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even pointer" ng-repeat="permit in permits | paginate" ng-class="{selectelement:permitselected.id==permit.id}">
+                                <td>{{permit.Role.title}}</td>
+                                <td>{{permit.Page.title}}</td>
+                                <td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selectedpermit(permit,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <paginator></paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Asignar permiso por rol</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form class="form-horizontal form-label-left">
+                    <p>
+                        <label for="idrole">Rol <span class="required">*</span></label>
+                        <select id="idrole" class="form-control" ng-options="role.title for role in listrole" ng-model="selectedrole" required ng-enter="saveuser()"
+                            ng-change="clearListPage()">                            
+                        </select>
+                    </p>
+
+                    <p>
+                        <div>
+                            <select-all-checkbox checkboxes="listpage" all-selected="AllSelectedItems" all-clear="NoSelectedItems"></select-all-checkbox> Todos
+                            <div class="form-inline">
+                                <div ng-repeat="item in listpage" class="form-group" style="width: 50%">
+                                    &nbsp;<input type="checkbox" ng-model="item.isSelected" />{{item.title}}</div>
+                            </div>
+                        </div>
+                    </p>
+                    <div class="ln_solid"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="button" class="btn btn-default" ng-click="newpermit()" title="Limpiar controles">Cancelar</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="savepermit()" title="Guardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modaldeletepermit" class="modal fade bs-example-modal-sm" tabindex="-1" permit="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Eliminar página</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+                <button type="button" class="btn btn-danger" ng-click="deletepermit()" title="Eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

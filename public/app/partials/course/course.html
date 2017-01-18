@@ -1,0 +1,91 @@
+﻿<div class="row">
+	<div class="col-md-6 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Rutas registradas</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="table-responsive">
+					<table class="table table-striped jambo_table bulk_action">
+						<thead class="headings">
+							<tr>
+								<th>#</th>
+								<th>Ruta</th>
+								<th>Detalle</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even pointer" ng-repeat="course in courses | paginate" ng-class="{selectelement:courseselected.id==course.id}">
+								<td>{{$index}}</td>
+								<td>{{course.numberid}}</td>
+								<td>{{course.detail}}</td>
+								<td ng-click="selectedcourse(course,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+								<td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selectedcourse(course,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<paginator></paginator>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Registrar ruta</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<form class="form-horizontal form-label-left">
+					<p>
+						<label for="idorigin">Origen <span class="required">*</span></label>
+						<select id="idorigin" class="form-control" ng-options="destination.title for destination in listdestination" ng-model="selectedorigin"
+							ng-change="selecteddestinationchange()" required>                            
+                        </select>
+					</p>
+
+					<p>
+						<label for="iddestination">Destino <span class="required">*</span></label>
+						<select id="iddestination" class="form-control" ng-options="destination.title for destination in listdestination | filterSelected :selectedorigin"
+							ng-model="selecteddestination" ng-change="selecteddestinationchange()" required ng-enter="savecourse()">                            
+                        </select>
+					</p>
+
+					<label for="numberid">Nombre <span class="required">*</span></label>
+					<input type="text" id="numberid" class="form-control textUpperCase" ngfocus order="1" ng-model="editcourse.numberid" required>
+
+					<label for="detail">Descripción</label>
+					<input type="text" id="detail" class="form-control" ngfocus ng-model="editcourse.detail" validate="text-number-hour" ng-enter="savecourse()">
+
+					<div class="ln_solid"></div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<button type="button" class="btn btn-default" ng-click="newcourse()" title="Limpiar controles">Cancelar</button>
+						<button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="savecourse()" title="Guardar">Guardar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modaldeletecourse" class="modal fade bs-example-modal-sm" tabindex="-1" course="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Eliminar ruta</h4>
+			</div>
+			<div class="modal-body">
+				<p>¿Esta seguro de eliminar el registro?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+				<button type="button" class="btn btn-danger" ng-click="deletecourse()" title="Eliminar">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,97 @@
+﻿<div class="row">
+	<div class="col-md-6 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Choferes registrados</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="table-responsive">
+					<table class="table table-striped jambo_table bulk_action">
+						<thead class="headings">
+							<tr>
+								<th>#</th>
+								<th>Nro Licencia</th>
+								<th>Nombre</th>
+								<th>Fecha Nacimiento</th>
+								<th>Tipo</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even pointer" ng-repeat="driver in drivers | paginate" ng-class="{selectelement:driverselected.id==driver.id}">
+								<td>{{$index}}</td>
+								<td>{{driver.numberid}}</td>
+								<td>{{driver.fullName}}</td>
+								<td>{{driver.birthdate}}</td>
+								<td>{{driver.Drivertype.title}}</td>
+								<td ng-click="selecteddriver(driver,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+								<td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selecteddriver(driver,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<paginator></paginator>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Registrar chofer</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<form class="form-horizontal form-label-left">
+					<p></p>
+					<label for="numberid">Nro licencia <span class="required">*</span></label>
+					<input type="text" id="numberid" class="form-control textUpperCase" ngfocus order="1" ng-model="editdriver.numberid" validate="text-number"
+						required>
+
+					<label for="firstname">Nombres (s) <span class="required">*</span></label>
+					<input type="text" id="firstname" class="form-control" ngfocus ng-model="editdriver.firstname" validate="text-number" required>
+
+					<label for="lastname">Apellidos <span class="required">*</span></label>
+					<input type="text" id="lastname" class="form-control" ngfocus ng-model="editdriver.lastname" validate="text-number" required>
+
+					<label for="birthdate">Fecha de nacimiento <span class="required">*</span></label>
+					<input type="text" id="birthdate" class="form-control date-picker" ngfocus ng-model="editdriver.birthdate" validate="date"
+						required data-inputmask="'mask': '99/99/9999'">
+
+					<p>
+						<label for="iddrivertype">Tipo chofer <span class="required">*</span></label>
+						<select id="iddrivertype" class="form-control" ng-options="drivertype.title for drivertype in listdrivertype" ng-model="selecteddrivertype"
+							required ng-enter="savedriver()">                            
+                        </select>
+					</p>
+
+					<div class="ln_solid"></div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<button type="button" class="btn btn-default" ng-click="newdriver()" title="Limpiar controles">Cancelar</button>
+						<button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="savedriver()" title="Guardar">Guardar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modaldeletedriver" class="modal fade bs-example-modal-sm" tabindex="-1" drivertype="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Eliminar chofer</h4>
+			</div>
+			<div class="modal-body">
+				<p>¿Esta seguro de eliminar el registro?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+				<button type="button" class="btn btn-danger" ng-click="deletedriver()" title="Eliminar">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>

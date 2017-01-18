@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ajustes registrados</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead class="headings">
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Nro NIT</th>
+                                <th>Nota factura</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even pointer" ng-repeat="setting in settings | paginate" ng-class="{selectelement:settingselected.id==setting.id}">
+                                <td>{{setting.title}}</td>
+                                <td>{{setting.numberid}}</td>
+                                <td>{{setting.note}}</td>
+                                <td ng-click="selectedsetting(setting,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <paginator></paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Registrar ajuste</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form class="form-horizontal form-label-left">
+                    <p></p>
+                    <label for="title">Nombre de la empresa <span class="required">*</span></label>
+                    <input type="text" id="title" class="form-control" ngfocus order="1" ng-model="editsetting.title"
+                        required ng-enter="savesetting()">
+
+                    <label for="numberid">Nro NIT <span class="required">*</span></label>
+                    <input type="text" id="numberid" class="form-control" ngfocus ng-model="editsetting.numberid" validate="number"
+                        required>
+
+                    <label for="note">Nota de la factura <span class="required">*</span></label>
+                    <textarea id="note" class="form-control" ngfocus ng-model="editsetting.note" required rows="2"></textarea>
+
+                    <div class="ln_solid"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="button" class="btn btn-default" ng-click="newsetting()" title="Limpiar contsettings">Cancelar</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="savesetting()" title="Guardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

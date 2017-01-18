@@ -1,0 +1,185 @@
+<div class="row">
+	<div class="col-md-12 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Programación diaria registrados</h2>
+				<button type="button" class="btn btn-default pull-right btnborderless" data-toggle="modal" data-target=".bs-example-modal-lg"
+					ng-click="newschedule()" title="Nuevo registro"><i class="fa fa-plus-square"></i> Nuevo</button>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div class="table-responsive">
+					<table class="table table-striped jambo_table bulk_action">
+						<thead class="headings">
+							<tr>
+								<th>#</th>
+								<th>Fecha</th>
+								<th>Hora salida</th>
+								<th>Hora llegada</th>
+								<th>Bus</th>
+								<th>Itinerario</th>
+								<th>Detalle</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="even pointer" ng-repeat="schedule in schedules | paginate" ng-class="{selectelement:scheduleselected.id==schedule.id}">
+								<td>{{$index}}</td>
+								<td>{{schedule.dateregister}}</td>
+								<td>{{schedule.arrival}}</td>
+								<td>{{schedule.departure}}</td>
+								<td>{{schedule.Bus.numberid}}</td>
+								<td>{{schedule.Travel.numberid}}</td>
+								<td>{{schedule.detail}}</td>
+								<td data-toggle="modal" data-target=".bs-example-modal-lg" ng-click="selectedschedule(schedule,1)"><i class="fa fa-pencil-square-o" title="Editar"></i></td>
+								<td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selectedschedule(schedule,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<paginator></paginator>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modaleditschedule" class="modal fade bs-example-modal-lg" tabindex="-1" travel="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Registrar programación diaria</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal form-label-left">
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="idtravel">Itinerario <span class="required">*</span></label>
+					<div class="col-md-10 col-sm-10 col-xs-12 form-group has-feedback">
+						<select id="idtravel" class="form-control" ng-options="travel.numberid for travel in listtravel" ng-model="selectedtravel"
+							ng-change="selectedtravelchange()" required>                            
+                        </select>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="idbus">Bus <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<select id="idbus" class="form-control" ng-options="bus.numberid for bus in listbus" ng-model="selectedbus" required>                            
+                        </select>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="dateregister">Fecha <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<input type="text" id="dateregister" class="form-control has-feedback-left active" ngfocus order="1" ng-model="editschedule.dateregister"
+							validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+						<span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+						<span id="inputSuccess2Status" class="sr-only">(success)</span>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="numberid">Hora salida <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<input type="text" id="arrival" class="form-control" ngfocus ng-model="editschedule.arrival" validate="text-number-hour"
+							required>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="numberorder">Hora llegada <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<input type="text" id="departure" class="form-control" ngfocus ng-model="editschedule.departure" validate="text-number-hour"
+							required>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="pricemin">Precio minimo <span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<input type="number" id="pricemin" class="form-control" ngfocus ng-model="editschedule.pricemin" validate="number" required>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="pricemax">Precio maximo<span class="required">*</span></label>
+					<div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+						<input type="number" id="pricemax" class="form-control" ngfocus ng-model="editschedule.pricemax" validate="number" required>
+					</div>
+
+					<label class="control-label col-md-2 col-sm-2 col-xs-12" for="detail">Detalles</label>
+					<div class="col-md-10 col-sm-10 col-xs-12 form-group has-feedback">
+						<textarea id="detail" class="form-control" ngfocus ng-model="editschedule.detail" rows="2"></textarea>
+					</div>
+
+
+					<div class="col-md-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Agregar chofer</h2>
+								<div class="clearfix"></div>
+							</div>
+
+							<div class="x_content">
+
+								<label class="control-label col-md-2 col-sm-2 col-xs-12" for="idtravel">Tipo de chofer <span class="required">*</span></label>
+								<div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+									<select id="type" class="form-control" required>
+											<option value="" disabled selected>Elija un tipo</option>
+											<option value="Chofer">Chofer</option>
+											<option value="Relevo">Relevo</option>
+										</select>
+								</div>
+
+								<label class="control-label col-md-2 col-sm-2 col-xs-12" for="idtravel">Chofer <span class="required">*</span></label>
+								<div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+									<select id="iddriver" class="form-control" ng-options="driver.fullName for driver in listdriver" ng-model="selecteddriver"
+										required>
+                        		</select>
+								</div>
+
+								<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+									<button type="button" class="btn btn-default pull-right btnborderless" ng-click="newscheduledetail()" title="Nuevo conductor"
+										ng-disabled="validatecontrolsdetail()">
+										<i class="fa fa-plus-square"></i> Agregar</button>
+								</div>
+
+								<table class="table table-striped jambo_table bulk_action">
+									<thead class="headings">
+										<tr>
+											<th>#</th>
+											<th>Tipo</th>
+											<th>Conductor</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="scheduledetail in schedulesdetails | filterDeleteGrid" ng-class="{selectelement:scheduledetailselected.id==scheduledetail.id}">
+											<td>{{$index+1}}</td>
+											<td>{{scheduledetail.drivertype}}</td>
+											<td>{{scheduledetail.fullName}}</td>
+											<td ng-click="deletescheduledetail(scheduledetail)"><i class="fa fa-trash" title="Eliminar"></i></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Limpiar controles y cerrar">Cancelar</button>
+				<button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="saveschedule()" title="Guardar">Guardar</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+</div>
+<div id="modaldeleteschedule" class="modal fade bs-example-modal-sm" tabindex="-1" travel="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Asignar pasajero</h4>
+			</div>
+			<div class="modal-body">
+				<p>¿Esta seguro de eliminar el registro?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+				<button type="button" class="btn btn-danger" ng-click="deleteschedule()" title="Eliminar">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,305 @@
+<div class="row hidden-print">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Venta de ticket <small></small></h2>
+				<ul class="nav navbar-right panel_toolbox">
+					<li><a class="collapse-link" ng-click="back()" ng-hide="showblack" title="Volver"><i class="fa fa-arrow-left"></i></a></li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<div id="step-0" class="content" style="display: block;">
+					<form class="form-horizontal form-label-left">
+						<div class="form-group">
+							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateinit">Fecha <span class="required">*</span></label>
+							<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+								<input type="text" id="dateinit" class="form-control has-feedback-left active" ngfocus order="1" ng-model="filtertravel.dateinit"
+									validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+								<span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+								<span id="inputSuccess2Status" class="sr-only">(success)</span>
+							</div>
+							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateend">Hasta <span class="required">*</span></label>
+							<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+								<input type="text" id="dateend" class="form-control has-feedback-left active" ngfocus order="1" ng-model="filtertravel.dateend"
+									validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+								<span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+								<span id="inputSuccess2Status" class="sr-only">(success)</span>
+							</div>
+						</div>
+						<div class="bs-glyphicons">
+							<ul class="bs-glyphicons-list">
+								<li data-ng-repeat="travel in listtravel" ng-click="selectedtravelchange(travel)">
+									<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+									<span class="glyphicon-class">{{travel.numberid}}</span>
+								</li>
+							</ul>
+						</div>
+					</form>
+				</div>
+
+				<div id="step-1" class="content" style="display: none;">
+					<form class="form-horizontal form-label-left">
+						<div class="col-md-12">
+							<div class="x_panel">
+								<div class="x_content">
+									<div class="table-responsive">
+										<table class="table table-striped jambo_table bulk_action">
+											<thead class="headings">
+												<tr>
+													<th>#</th>
+													<th>Fecha</th>
+													<th>Tipo Bus</th>
+													<th>Marca/Modelo</th>
+													<th>Nro Placa</th>
+													<th>Nro de asientos</th>
+													<th>Hora salida</th>
+													<th>Hora llegada</th>
+													<th>Detalle</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="even pointer" ng-repeat="schedule in listschedule" ng-class="{selectelement:scheduleselected.id==schedule.id}">
+													<td>{{$index + 1 }}</td>
+													<td>{{schedule.dateregister}}</td>
+													<td>{{schedule.Bus.Bustype.title}}</td>
+													<td>{{schedule.Bus.make}}/{{schedule.Bus.model}}</td>
+													<td>{{schedule.Bus.numberid}}</td>
+													<td>{{schedule.Bus.numberseats}}</td>
+													<td>{{schedule.arrival}}</td>
+													<td>{{schedule.departure}}</td>
+													<td>{{schedule.detail}}</td>
+													<td ng-click="scheduleselected(schedule)"><i class="fa fa-arrow-right" title="Generar"></i></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+				<div id="step-2" class="content" style="display: none;">
+
+					<div class="row">
+						<div ng-include="bustypepath"></div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Pasajes</h2>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="x_content">
+									<div class="table-responsive">
+										<table class="table table-striped jambo_table bulk_action">
+											<thead class="headings">
+												<tr>
+													<th>Nro</th>
+													<th>Pasajero</th>
+													<th>Documento</th>
+													<th>Precio</th>
+													<th>Equipaje</th>
+													<th>Peso</th>
+													<th></th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="ticket in listtickets" ng-class="{selectelement:ticketdetailselected.id==listtickets.id}">
+													<td>{{ticket.numberseat}}</td>
+													<td>{{ticket.fullName}}</td>
+													<td>{{ticket.numberid}}</td>
+													<td style="text-align: right;">{{ticket.price}}</td>
+													<td>{{ticket.numberbaggage}}</td>
+													<td>{{ticket.weightbaggage}}</td>
+													<td ng-click="deleteticketdetail(ticket)"><i class="fa fa-trash" title="Eliminar"></i></td>
+													<td ng-click="copyticketdetail(ticket)"><i class="fa fa-copy" title="Facturar"></i></td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td></td>
+													<td></td>
+													<td style="text-align: right; font-weight: bold;">Total</td>
+													<td style="text-align: right; font-weight: bold;">{{ sumTotal }}</td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td></td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Datos para la factura</h2>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="x_content">
+
+									<form class="form-horizontal form-label-left">
+
+										<label for="dateregister">Fecha <span class="required">*</span></label>
+										<div class="form-group has-feedback">
+											<input type="text" id="dateregister" class="form-control has-feedback-left active" ngfocus ng-model="headerticket.dateregister"
+												validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+											<span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+											<span id="inputSuccess2Status" class="sr-only">(success)</span>
+										</div>
+
+										<label for="numbernitinvoice">Nro de NIT <span class="required">*</span></label>
+										<input type="text" id="numbernitinvoice" class="form-control textUpperCase" ngfocus ng-model="headerticket.numbernitinvoice"
+											validate="number" required>
+
+										<label for="nameinvoice">Nombre para la factura <span class="required">*</span></label>
+										<input type="text" id="nameinvoice" class="form-control textUpperCase" ngfocus ng-model="headerticket.nameinvoice" validate="text-number"
+											required>
+
+										<div class="ln_solid"></div>
+										<div>
+											<button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="saveticket()" title="Facturar"><i class="fa fa-credit-card"></i> Guardar</button>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="modaleditcustomer" class="modal fade bs-example-modal-sm hidden-print" tabindex="-1" travel="dialog" aria-hidden="true"
+	style="display: none;">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" ng-click="cancelSeat()" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title">Asignar pasajero</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal form-label-left">
+					<p></p>
+
+					<label for="price">Precio <span class="required">*</span>
+					<span style="font-size: 8pt; font-weight: 100; font-style: italic;">   [Mínimo: {{selectedschedule.pricemin}}; Máximo: {{selectedschedule.pricemax}}]</span> </label>
+					<input type="number" id="price" class="form-control" ngfocus validate="number" required ng-model="price">
+
+					<label for="numberidcustomer">Nro identidad <span class="required">*</span></label>
+					<input type="text" id="numberidcustomer" class="form-control textUpperCase" required ng-model="numberidcustomer">
+
+					<label for="namecustomer">Nombre y apellido<span class="required">*</span></label>
+					<input type="text" id="namecustomer" class="form-control textUpperCase" required ng-model="namecustomer">
+
+					<label for="numberbaggage">Nro de equipaje <span class="required">*</span></label>
+					<input type="number" id="numberbaggage" class="form-control" ngfocus validate="number" required ng-model="numberbaggage">
+
+					<label for="weightbaggage">Peso equipaje (kg)<span class="required">*</span></label>
+					<input type="number" id="weightbaggage" class="form-control" ngfocus validate="number" required ng-model="weightbaggage">
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar" ng-click="cancelSeat()">Cancelar</button>
+				<button type="button" class="btn btn-primary" ng-disabled="validatecontrolsdetail()" ng-click="newticketdetail()" title="Asignar">Asignar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div style="width: 265px; font-size: 11px;" id="invoice-file">
+	<p style="text-align: center"><b>{{datainvoice.titleCompany}}</b></p>
+	<p style="text-align: center">{{datainvoice.titleOffice}}<br /> {{datainvoice.addressOffice}} Telf: {{datainvoice.phoneOffice}}<br /> {{datainvoice.detailOffice}}</p>
+	<p style="text-align: center">------------------------------------------------------------</p>
+	<p style="text-align: center">FACTURA ORIGINAL</p>
+	<p style="text-align: center">------------------------------------------------------------</p>
+	<p style="text-align: center">NIT: {{datainvoice.numberidCompany}}<br /> FACTURA Nro: {{datainvoice.numberInvoice}}<br /> AUTORIZACION: {{datainvoice.numberorderInvoice}}</p>
+	<p style="text-align: center">------------------------------------------------------------</p>
+	<p style="text-align: center">FECHA: {{datainvoice.dateInvoice}}<br /> SENOR(es): {{datainvoice.nameInvoice}}<br /> NIT/CI: {{datainvoice.numbernitInvoice}}</p>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th style="text-align: center">CANT.</th>
+				<th style="text-align: center">DESCRIPCION</th>
+				<th style="text-align: center">PRECIO</th>
+				<th style="text-align: center">TOTAL</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="detail in detailinvoice">
+				<td>1</td>
+				<td>PASAJE</td>
+				<td>{{detail.price}}</td>
+				<td>{{detail.price}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<td></td>
+			<td></td>
+			<td>TOTAL Bs</td>
+			<td>{{datainvoice.total}}</td>
+		</tfoot>
+	</table>
+	<p>Son: {{datainvoice.totalliteral}}</p>
+	<p style="text-align: center">------------------------------------------------------------</p>
+	<p>CÓDIGO DE CONTROL: {{datainvoice.codecontrolInvoice}}</p>
+	<p>FECHA LIMITE DE EMISION {{datainvoice.deadline}}</p>
+	<p style="text-align: center">Salida {{datainvoice.date}} Hrs. {{datainvoice.arrival}}</p>
+	<p><label id="qrinvoice"></label></p>
+
+	<p style="text-align: center">{{datainvoice.noteCompany}}</p>
+
+	<p style="text-align: center">------------------------------------------------------------
+		<br /> GRACIAS POR SU PREFERENCIA</p>
+	<p style="text-align: center">------------------------------------------------------------</p>
+
+	<i>i</i>
+	<div ng-repeat="detail in detailinvoice" class="ticket">
+		<p>ASIENTO: <b>{{detail.number}}</b></p>
+		<p>Origen: {{detail.origin}} Destino: {{detail.destination}}</p>
+		<p>Bus: {{detail.typebus}}</p>
+		<p>Salida: {{datainvoice.date}} Hrs: {{datainvoice.arrival}}</p>
+		<p>Nombre: {{detail.fullname}} CI: {{detail.numberid}}</p>
+		<p style="text-align: center">Bs {{detail.price}}</p><br /><br />
+		<i>i</i>
+	</div>
+
+</div>
+<style>
+	@media print {
+		label {
+			display: block;
+			margin: 5px 0;
+		}
+		.ticket {
+			padding-top: 10px;
+		}
+		#invoice-file {
+			font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+			font-weight: normal;
+			font-style: normal;
+			width: 100% !important;
+			font-size: 14px !important;
+			text-align: center;
+			display: block !important;
+		}
+		#invoice-file div {
+			border-bottom: solid #BBB 1px;
+		}
+		#invoice-file .footer {
+			border-bottom: none;
+		}
+	}
+</style>

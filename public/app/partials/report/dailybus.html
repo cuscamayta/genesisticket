@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Ventas diarias <small></small></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <form class="form-horizontal form-label-left">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateinit">Desde <span class="required">*</span></label>
+                        <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                            <input type="text" id="dateinit" class="form-control has-feedback-left active" ngfocus order="1" ng-model="editschedule.dateinit"
+                                validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                        </div>
+
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateend">Hasta <span class="required">*</span></label>
+                        <div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
+                            <input type="text" id="dateend" class="form-control has-feedback-left active" ngfocus order="1" ng-model="editschedule.dateend"
+                                validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+                            <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                        </div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <select id="idbus" class="form-control" ng-options="bus.numberid for bus in listbus" ng-model="selectedbus" required></select>
+                        </div>
+
+                        <div class="col-md-1 col-sm-1 col-xs-12">
+                            <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="generatedailybus()" title="Generar reporte">Generar</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="table-responsive">
+                                    <div ng-show="listsales.length <= 0" class="alert-no-data">No existen datos para mostrar</div>
+                                    <table ng-show="listsales.length > 0" class="table table-striped jambo_table bulk_action">
+                                        <thead class="headings">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Fecha</th>
+                                                <th>Hora salida</th>
+                                                <th>Hora llegada</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even pointer" ng-repeat="sale in listsales" ng-class="{selectelement:saleselected.id==sale.id}">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{sale.dateregister}}</td>
+                                                <td>{{sale.arrival}}</td>
+                                                <td>{{sale.departure}}</td>
+                                                <td style="text-align: right;">{{sale.total}}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="font-weight: bold;">Total</td>
+                                                <td style="text-align: right; font-weight: bold;">{{ sumTotal }}</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="login_wrapper" style="margin-top: -2%">
+	<div class="animate form login_form">
+		<section class="login_content">
+			<form role="form">
+				<div id="step-1" class="content" style="display: block;">
+					<h1>Inciar sesión</h1>
+					<div>
+						<input type="text" class="form-control" placeholder="Usuario" required="" data-ng-model="user.username">
+					</div>
+					<div>
+						<input type="password" class="form-control" placeholder="Contraseña" required="" data-ng-model="user.password" ng-enter="login()">
+					</div>
+					<div>
+						<button type="button" class="btn btn-default submit" ng-disabled="validatecontrols()" ng-click="login()">Ingresar</button>
+					</div>
+				</div>
+				<div id="step-2" class="content" style="display: none;">
+					<h1>Seleccione sucursal</h1>
+					<div>
+						<select id="idoffice" class="form-control" ng-options="office.Office.title for office in listoffice" ng-model="selectedoffice" required></select>
+					</div>
+					<p></p>					
+					<div>
+						<button type="button" class="btn btn-default submit" ng-disabled="validateoffice()" ng-click="getmenu()">Ingresar</button>
+					</div>
+				</div>
+			</form>
+		</section>
+	</div>
+</div>

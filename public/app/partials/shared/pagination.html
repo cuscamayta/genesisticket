@@ -1,0 +1,32 @@
+<div class="col-sm-3">
+
+    <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">{{paginator.page +1 }} de {{paginator.pageCount()}}</div>
+</div>
+<div class="col-sm-9">
+    <div class="dataTables_paginate paging_simple_numbers" id="datatable-fixed-header_paginate">
+        <ul class="pagination" ng-show="paginator.pageCount() > 1">
+            <li ng-click="paginator.firstPage()" ng-class="paginator.isFirstPage() && 'disabled'">
+                <a>
+                    <i class="fa fa-angle-double-left" ng-class="paginator.isFirstPage() && 'icon-white'"></i>
+                </a>
+            </li>
+            <li ng-click="paginator.perviousPage()" ng-class="paginator.isFirstPage() && 'disabled'">
+                <a>
+                    <i class="fa fa-angle-left" ng-class="paginator.isFirstPage() && 'icon-white'"></i>
+                </a>
+            </li>
+
+            <li ng-click="paginator.setPage(i)" ng-repeat="i in [] | forLoop:0:paginator.pageCount()" ng-class="paginator.page==i && 'active'">
+                <a>{{i+1}}</a>
+            </li>
+
+            <li ng-click="paginator.nextPage()" ng-class="paginator.isLastPage() && 'disabled'" id="datatable-fixed-header_next">
+                <a> <i class="fa fa-angle-right" ng-class="paginator.isLastPage() && 'icon-white'"></i></a>
+            </li>
+            <li ng-click="paginator.lastPage()" ng-class="paginator.isLastPage() && 'disabled'">
+                <a><i class="fa fa-angle-double-right" ng-class="paginator.isLastPage() && 'icon-white'"></i></i></a>
+            </li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</div>

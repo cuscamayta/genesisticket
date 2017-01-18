@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Sucursales por usuario registrados</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead class="headings">
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Nombre completo</th>
+                                <th>Sucursal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even pointer" ng-repeat="useroffice in useroffices | paginate" ng-class="{selectelement:userofficeselected.id==useroffice.id}">
+                                <td>{{useroffice.User.username}}</td>
+                                <td>{{useroffice.User.fullName}}</td>
+                                <td>{{useroffice.Office.title}}</td>
+                                <td data-toggle="modal" data-target=".bs-example-modal-sm" ng-click="selecteduseroffice(useroffice,2)"><i class="fa fa-trash" title="Eliminar"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <paginator></paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Asignar sucursal al usuario</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form class="form-horizontal form-label-left">
+                    <p>
+                        <label for="iduser">Usuario <span class="required">*</span></label>
+                        <select id="iduser" class="form-control" ng-options="user.fullName for user in listuser" ng-model="selecteduser" required ng-enter="saveuser()">                            
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="idoffice">Sucursal <span class="required">*</span></label>
+                        <select id="idoffice" class="form-control" ng-options="office.title for office in listoffice" ng-model="selectedoffice" required ng-enter="saveuseroffice()">                            
+                        </select>
+                    </p>
+
+                    <div class="ln_solid"></div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <button type="button" class="btn btn-default" ng-click="newuseroffice()" title="Limpiar controles">Cancelar</button>
+                        <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="saveuseroffice()" title="Guardar">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modaldeleteuseroffice" class="modal fade bs-example-modal-sm" tabindex="-1" useroffice="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Eliminar registro</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro de eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" title="Cerrar">Cancelar</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteuseroffice()" title="Eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
