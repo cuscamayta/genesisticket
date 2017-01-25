@@ -15,7 +15,6 @@ app.run(function ($localStorage, $rootScope, $location, $timeout) {
 });
 
 app.config(function ($routeProvider, $httpProvider) {
-    debugger;
     $routeProvider
         .when('/', {
             controller: 'HomeController',
