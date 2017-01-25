@@ -18,7 +18,7 @@
     "username": "9db6ca_ticket",
     "password": "P@ssw0rd2017",
     "database": "db_9db6ca_ticket",
-    "host": "127.0.0.1",
+    "host": "mysql5005.smarterasp.net",
     "dialect": "mysql",
     "timezone": "-04:00"
   }
