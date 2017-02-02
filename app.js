@@ -6,6 +6,8 @@ var express = require('express'),
   debug = require('debug')('express-sequelize'),
   http = require('http'),
   jwt = require("jsonwebtoken"),
+  nodeExcel = require('excel-export'),
+  uuid = require('node-uuid'),
   models = require('./server/models');
 
 app.use(bodyParser.urlencoded({
