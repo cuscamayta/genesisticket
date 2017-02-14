@@ -1,4 +1,4 @@
-app.controller('DailysaleController', function($scope, SalesbookService, OfficeService, $rootScope) {
+app.controller('DailysaleController', function ($scope, SalesbookService, OfficeService, $rootScope) {
     init();
 
     function init() {
@@ -15,7 +15,7 @@ app.controller('DailysaleController', function($scope, SalesbookService, OfficeS
             singleDatePicker: true,
             showDropdowns: true,
             calender_style: "picker_4"
-        }).on('apply.daterangepicker', function(ev, picker) {
+        }).on('apply.daterangepicker', function (ev, picker) {
             $scope.filters.dateinit = picker.startDate.format('DD/MM/YYYY');
         });
 
@@ -24,14 +24,14 @@ app.controller('DailysaleController', function($scope, SalesbookService, OfficeS
             singleDatePicker: true,
             showDropdowns: true,
             calender_style: "picker_4"
-        }).on('apply.daterangepicker', function(ev, picker) {
+        }).on('apply.daterangepicker', function (ev, picker) {
             $scope.filters.dateend = picker.startDate.format('DD/MM/YYYY');
         });
     }
 
     function getoffices() {
         var response = OfficeService.getofficesforselect();
-        response.then(function(res) {
+        response.then(function (res) {
             if (!res.isSuccess) {
                 toastr.error(res.message);
             }
@@ -41,23 +41,36 @@ app.controller('DailysaleController', function($scope, SalesbookService, OfficeS
         });
     }
 
-    $scope.generatedailysale = function() {
+    $scope.generatedailysale = function () {
         $scope.filters.idoffice = $scope.selectedoffice.id;
         var response = SalesbookService.getsalesbooksforselect($scope.filters);
-        response.then(function(res) {
+        response.then(function (res) {
             if (!res.isSuccess) {
                 toastr.error(res.message);
             }
             else {
                 $scope.listsales = res.data;
-                $scope.sumTotal = $scope.listsales.sum(function(item) {
+                $scope.sumTotal = $scope.listsales.sum(function (item) {
                     return parseInt(item.amountinvoice);
                 });
             }
         });
     };
 
-    $scope.validatecontrols = function() {
+    $scope.exportdailysale = function () {
+        $scope.filters.idoffice = $scope.selectedoffice.id;
+        var protocol = location.protocol;
+        var slashes = protocol.concat("//");
+        var host = slashes.concat(window.location.hostname);
+
+        $scope.filters.list = $scope.listsales;
+
+        setTimeout(function () {
+            window.open(host + ':3001/salesbooks/Excel',  $scope.filters)
+        }, 5000);
+    };
+
+    $scope.validatecontrols = function () {
         return $scope.filters == null || $scope.filters.dateinit == null
             || $scope.filters.dateend == null || $scope.selectedoffice == null;
     };
