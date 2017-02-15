@@ -63,12 +63,37 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
         var slashes = protocol.concat("//");
         var host = slashes.concat(window.location.hostname);
 
-        $scope.filters.list = $scope.listsales;
+        $scope.filters.list = JSON.stringify($scope.listsales);
 
         setTimeout(function () {
-            window.open(host + ':3001/salesbooks/Excel',  $scope.filters)
+            //window.open(host + ':3001/salesbooks/Excel', $scope.filters)            
+            OpenWindowWithPost(host + ":3001/salesbooks/Excel", "Ventas diarias", $scope.filters);
+
         }, 5000);
     };
+
+    function OpenWindowWithPost(url, name, params, windowOptions) {
+        windowOptions = windowOptions || "center=yes,resizable=no,help=no,status=no,Width=930px,Height=650px,scrollbars=no";
+
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", url);
+        form.setAttribute("target", name);
+
+        for (var i in params) {
+            if (params.hasOwnProperty(i)) {
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = i;
+                input.value = params[i];
+                form.appendChild(input);
+            }
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+    }
 
     $scope.validatecontrols = function () {
         return $scope.filters == null || $scope.filters.dateinit == null

@@ -39,23 +39,12 @@ router.post('/voidedinvoice', common.isAuthenticate, function (request, response
     });
 });
 
-router.get('/Excel', function (request, response) {
+router.post('/Excel', function (request, response) {
     var conf = {};
     conf.cols = [{
         caption: 'Fecha',
-        type: 'date',
-        captionStyleIndex: 1,
-        beforeCellWrite: function () {
-            var originDate = new Date(Date.UTC(1899, 11, 30));
-            return function (row, cellData, eOpt) {
-                if (cellData === null) {
-                    eOpt.cellType = 'string';
-                    return 'N/A';
-                } else
-                    return (cellData - originDate) / (24 * 60 * 60 * 1000);
-            }
-        } ()
-        //, width: 20.85        
+        type: 'string',
+        captionStyleIndex: 1
     }, {
         caption: 'Nro Orden',
         type: 'number'
@@ -74,21 +63,28 @@ router.get('/Excel', function (request, response) {
     }, {
         caption: 'Importe',
         type: 'number'
+    }, {
+        caption: 'Sucursal',
+        type: 'string'
     }];
-    conf.rows = request.body.list;
 
-    //for (var i = 0; i < request.body.list; i++) {
+    var dataList = JSON.parse(request.body.list);
 
-    //}
+    conf.rows = [];
 
-    //conf.rows = [
+    for (var i = 0; i < dataList.length; i++) {
+        var rowData = new Array(
+            dataList[i].dateregister,
+            dataList[i].numberorder,
+            dataList[i].numbercontrol,
+            dataList[i].numberinvoice,
+            dataList[i].numberid,
+            dataList[i].fullname,
+            dataList[i].amountinvoice,
+            dataList[i].Office.title);
+        conf.rows.push(rowData);
+    }
 
-
-    //['pi', new Date(Date.UTC(2013, 4, 1)), true, 3.14159],
-    //["e", new Date(2012, 4, 1), false, 2.7182],
-    //["M&M<>'", new Date(Date.UTC(2013, 6, 9)), false, 1.61803],
-    //["null date", null, true, 1.414]
-    //];
     var result = nodeExcel.execute(conf);
     response.setHeader('Content-Type', 'application/vnd.openxmlformats');
     response.setHeader("Content-Disposition", "attachment; filename=" + "Report.xlsx");

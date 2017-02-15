@@ -34,5 +34,5 @@ app.service('CommonService', function ($http, $q) {
             return { value: value, data: key };
         });
         return colorsArray;
-    };
+    };    
 });
