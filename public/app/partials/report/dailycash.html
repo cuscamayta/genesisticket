@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row hidden-print">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
@@ -6,7 +6,6 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-
                 <form class="form-horizontal form-label-left">
 
                     <div class="form-group">
@@ -26,17 +25,17 @@
                             <span id="inputSuccess2Status" class="sr-only">(success)</span>
                         </div>
 
-                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="iduser">Usuario</label>
                         <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
                             <select id="iduser" class="form-control" ng-options="user.fullName for user in listuser" ng-model="selecteduser" required></select>
                         </div>
 
-                        <div class="col-md-1 col-sm-1 col-xs-12">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
                             <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="generatedailycash()" title="Generar reporte">Generar</button>
+                            <button type="button" class="btn btn-primary" ng-show="listsales.length > 0" ng-click="printReport()" title="Imprimir reporte">Imprimir</button>
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_content">
                                 <div class="table-responsive">
@@ -58,7 +57,7 @@
                                                 <td>{{sale.dateregister}}</td>
                                                 <td>{{sale.arrival}}</td>
                                                 <td>{{sale.departure}}</td>
-                                                <td style="text-align: right;">{{sale.total}}</td>
+                                                <td class="textRight">{{sale.total}}</td>
                                                 <td>{{sale.User.fullName}}</td>
                                             </tr>
                                         </tbody>
@@ -67,8 +66,8 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td style="font-weight: bold;">Total</td>
-                                                <td style="text-align: right; font-weight: bold;">{{ sumTotal }}</td>
+                                                <td class="textBold">Total</td>
+                                                <td class="textRightBold">{{ sumTotal }}</td>
                                                 <td></td>
                                             </tr>
                                         </tfoot>
@@ -82,3 +81,62 @@
         </div>
     </div>
 </div>
+<div id="dataPrint" ng-show="false">
+    <h2>Arqueo de caja</h2>
+    <small>
+        Usuario: {{selecteduser.fullName}}
+    </small>
+    <table ng-show="listsales.length > 0" class="table table-striped jambo_table bulk_action">
+        <thead class="headings">
+            <tr>
+                <th>#</th>
+                <th>Fecha</th>
+                <th>Hora salida</th>
+                <th>Hora llegada</th>
+                <th>Total</th>
+                <th>Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="even pointer" ng-repeat="sale in listsales" ng-class="{selectelement:saleselected.id==sale.id}">
+                <td>{{$index + 1}}</td>
+                <td>{{sale.dateregister}}</td>
+                <td>{{sale.arrival}}</td>
+                <td>{{sale.departure}}</td>
+                <td class="textRight">{{sale.total}}</td>
+                <td>{{sale.User.fullName}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="textBold">Total</td>
+                <td class="textRightBold">{{ sumTotal }}</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<style>
+	@media print {
+		label {
+			display: block;
+			margin: 5px 0;
+		}        
+		#dataPrint {
+			font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+			font-weight: normal;
+			font-style: normal;
+			width: 100% !important;
+			font-size: 14px !important;
+			text-align: center;
+			display: block !important;
+		}		
+		#dataPrint .footer {
+			border-bottom: none;
+		}
+	}
+</style>

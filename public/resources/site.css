@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+.textRight{
+    text-align: right;    
+}
+
+.textRightBold{
+    text-align: right;
+    font-weight: bold;   
+}
+.textBold{
+    font-weight: bold; 
+}
+
 .validationerror{
   /*float: right;*/
   /*margin: 0 0 0 20px;

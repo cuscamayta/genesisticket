@@ -66,7 +66,6 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
         $scope.filters.list = JSON.stringify($scope.listsales);
 
         setTimeout(function () {
-            //window.open(host + ':3001/salesbooks/Excel', $scope.filters)            
             OpenWindowWithPost(host + ":3001/salesbooks/Excel", "Ventas diarias", $scope.filters);
 
         }, 5000);

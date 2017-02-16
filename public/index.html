@@ -35,15 +35,15 @@
 	<!-- Custom Theme Style -->
 	<link href="../resources/custom/css/custom.min.css" rel="stylesheet">
 	<link href="../resources/site.css" rel="stylesheet">
-	<script language="VBScript">
-        sub Print()
-            OLECMDID_PRINT = 6
-            OLECMDEXECOPT_DONTPROMPTUSER = 2
-            OLECMDEXECOPT_PROMPTUSER = 1
-            call WB.ExecWB(OLECMDID_PRINT, OLECMDEXECOPT_DONTPROMPTUSER,1)
-        End Sub
-        document.write "<object id='WB' width='0' height='0' classid='CLSID:8856F961-340A-11D0-A96B-00C04FD705A2'></object>"
-    </script>
+<script language="VBScript">
+		sub Print()
+		OLECMDID_PRINT = 6
+		OLECMDEXECOPT_DONTPROMPTUSER = 2
+		OLECMDEXECOPT_PROMPTUSER = 1		
+		ECOPT_DONTPROMPTUSER		
+		End Sub
+		document.write "<object id='WB' width='0' height='0' classid='CLSID:8856F961-340A-11D0-A96B-00C04FD705A2'></object>"
+	</script>
 </head>
 
 <body class="nav-md">
@@ -53,198 +53,198 @@
 			<div class="col-md-3 left_col" ng-hide="!currentUser">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="#" class="site_title"><i class="fa fa-bus"></i> <span>Ticket System</span></a>
-					</div>
+<a href="#" class="site_title"><i class="fa fa-bus"></i> <span>Ticket System</span></a>
+</div>
 
-					<div class="clearfix"></div>
-					<br />
+<div class="clearfix"></div>
+<br />
 
-					<!-- sidebar menu -->
-					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<!--	<h3>Menu</h3> -->
-							<ul class="nav side-menu">
-								<li ng-repeat="module in listMenuPermit"><a><i class="{{module.moduleClass}}"></i> {{module.moduleName}} <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li ng-repeat="page in module.pages"><a href="#/{{page.path}}">{{page.title}}</a></li>
-									</ul>
-								</li>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- top navigation -->
-			<div class="top_nav hidden-print" ng-hide="!currentUser">
-				<div class="nav_menu">
-					<nav>
-						<div class="nav toggle">
-							<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-						</div>
-
-						<ul class="nav navbar-nav navbar-right">
-							<li class="">
-								<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-									<img src="app/images/img.jpg" alt="">{{fullnameuser}} - {{roleuser}} - {{nameoffice}}
-									<span class=" fa fa-angle-down"></span>
-								</a>
-								<ul class="dropdown-menu dropdown-usermenu pull-right">
-									<li><a href="#password">Cambiar contraseña</a></li>
-									<li><a href="#!" data-ng-click="logout($event)"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-			<!-- /top navigation -->
-
-			<!-- page content -->
-			<div class="right_col" role="main" data-ng-style="isLoginPage()" style="background-size: 100% 100%; background-image: url(/app/images/fondo.jpg); border: 1px solid transparent">
-				<div style="clear: both"></div>
-				<div data-ng-view>
-					Content here
-				</div>
-			</div>
-			<!-- /page content -->
-
-			<!-- footer content -->
-			<footer data-ng-style="isLoginPage()" class="hidden-print">
-				<div class="pull-right">
-					Ticket Bus System - by <a href="www.emgineersworking.com">EngineersWorking</a>
-				</div>
-				<div class="clearfix"></div>
-			</footer>
-			<!-- /footer content -->
-		</div>
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+	<div class="menu_section">
+		<!--	<h3>Menu</h3> -->
+		<ul class="nav side-menu">
+			<li ng-repeat="module in listMenuPermit"><a><i class="{{module.moduleClass}}"></i> {{module.moduleName}} <span class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li ng-repeat="page in module.pages"><a href="#/{{page.path}}">{{page.title}}</a></li>
+				</ul>
+			</li>
 	</div>
-	
-	<div class="loader">
-		<div>
-			<span>
+</div>
+</div>
+</div>
+
+<!-- top navigation -->
+<div class="top_nav hidden-print" ng-hide="!currentUser">
+	<div class="nav_menu">
+		<nav>
+			<div class="nav toggle">
+				<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="">
+					<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<img src="app/images/img.jpg" alt="">{{fullnameuser}} - {{roleuser}} - {{nameoffice}}
+						<span class=" fa fa-angle-down"></span>
+					</a>
+					<ul class="dropdown-menu dropdown-usermenu pull-right">
+						<li><a href="#password">Cambiar contraseña</a></li>
+						<li><a href="#!" data-ng-click="logout($event)"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>
+<!-- /top navigation -->
+
+<!-- page content -->
+<div class="right_col" role="main" data-ng-style="isLoginPage()" style="background-size: 100% 100%; background-image: url(/app/images/fondo.jpg); border: 1px solid transparent">
+<div style="clear: both"></div>
+<div data-ng-view>
+	Content here
+</div>
+</div>
+<!-- /page content -->
+
+<!-- footer content -->
+<footer data-ng-style="isLoginPage()" class="hidden-print">
+	<div class="pull-right">
+		Ticket Bus System - by <a href="www.emgineersworking.com">EngineersWorking</a>
+	</div>
+	<div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+</div>
+</div>
+
+<div class="loader">
+	<div>
+		<span>
                 <img src="/app/images/loader.gif" /><i data-i18n="_TITLELOADER"></i></span>
-		</div>
 	</div>
+</div>
 
-	<!-- jQuery -->
-	<script src="../app/libs/jquery.min.js"></script>
-	<script src="../app/libs/jquery-ui-1.11.4.js"></script>
+<!-- jQuery -->
+<script src="../app/libs/jquery.min.js"></script>
+<script src="../app/libs/jquery-ui-1.11.4.js"></script>
 
-	<!-- Bootstrap -->
-	<script src="../app/libs/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../app/libs/jquery.imagemapster.js"></script>
+<!-- Bootstrap -->
+<script src="../app/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="../app/libs/jquery.imagemapster.js"></script>
 
-	<!-- Moment -->
-	<script src="../app/libs/moment.min.js"></script>
+<!-- Moment -->
+<script src="../app/libs/moment.min.js"></script>
 
-	<!-- bootstrap-daterangepicker -->
-	<script src="../resources/bootstrap-daterangepicker/js/daterangepicker.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="../resources/bootstrap-daterangepicker/js/daterangepicker.js"></script>
 
-	<!-- qrcode -->
-	<script src="resources/qrcode/js/jquery.qrcode.js"></script>
-	<script src="resources/qrcode/js/qrcode.js"></script>
+<!-- qrcode -->
+<script src="resources/qrcode/js/jquery.qrcode.js"></script>
+<script src="resources/qrcode/js/qrcode.js"></script>
 
-	<!-- toastr -->
-	<script src="resources/toastr/js/toastr.js"></script>
+<!-- toastr -->
+<script src="resources/toastr/js/toastr.js"></script>
 
-	<!-- jquery.timeentry -->
-	<script src="resources/jquery.timeentry/js/jquery-migrate-1.2.1.js"></script>
-	<script src="resources/jquery.timeentry/js/jquery.timeentry.min.js"></script>
+<!-- jquery.timeentry -->
+<script src="resources/jquery.timeentry/js/jquery-migrate-1.2.1.js"></script>
+<script src="resources/jquery.timeentry/js/jquery.timeentry.min.js"></script>
 
-	<!-- Select2 -->
-	<script src="../resources/select2/js/select2.full.min.js"></script>
+<!-- Select2 -->
+<script src="../resources/select2/js/select2.full.min.js"></script>
 
-	<!-- jQuery autocomplete -->
-	<script src="../resources/devbridge-autocomplete/js/jquery.autocomplete.min.js"></script>
+<!-- jQuery autocomplete -->
+<script src="../resources/devbridge-autocomplete/js/jquery.autocomplete.min.js"></script>
 
-	<!-- Custom Theme Scripts -->
-	<script src="../resources/custom/js/custom.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="../resources/custom/js/custom.js"></script>
 
-	<!--angularJS resources-->
-	<script src="app/libs/angular.js"></script>
-	<script src="app/libs/localstore.js"></script>
-	<script src="app/libs/prototype.js"></script>
+<!--angularJS resources-->
+<script src="app/libs/angular.js"></script>
+<script src="app/libs/localstore.js"></script>
+<script src="app/libs/prototype.js"></script>
 
-	<script src="app/app.js"></script>
+<script src="app/app.js"></script>
 
-	<!--angularJS directives-->
-	<script src="app/directives/pagination.js"></script>
-	<script src="app/directives/validation.js"></script>
-	<script src="app/directives/filtergrid.js"></script>
-	<script src="app/directives/focus.js"></script>
-	<script src="app/directives/enter.js"></script>
-	<script src="app/directives/autocomplete.js"></script>
-	<script src="app/directives/selectAllCheckbox.js"></script>
+<!--angularJS directives-->
+<script src="app/directives/pagination.js"></script>
+<script src="app/directives/validation.js"></script>
+<script src="app/directives/filtergrid.js"></script>
+<script src="app/directives/focus.js"></script>
+<script src="app/directives/enter.js"></script>
+<script src="app/directives/autocomplete.js"></script>
+<script src="app/directives/selectAllCheckbox.js"></script>
 
-	<!--Controller and Services-->
-	<script src="app/controllers/home/homeController.js"></script>
-	<script src="app/services/home/homeService.js"></script>
-	<script src="app/controllers/home/loginController.js"></script>
-	<script src="app/services/home/loginService.js"></script>
-	<script src="app/services/security/settingService.js"></script>
-	<script src="app/controllers/security/settingController.js"></script>
-	<script src="app/services/security/moduleService.js"></script>
-	<script src="app/controllers/security/moduleController.js"></script>
-	<script src="app/services/security/pageService.js"></script>
-	<script src="app/controllers/security/pageController.js"></script>
-	<script src="app/services/security/userService.js"></script>
-	<script src="app/controllers/security/userController.js"></script>
-	<script src="app/services/security/roleService.js"></script>
-	<script src="app/controllers/security/roleController.js"></script>
-	<script src="app/services/security/permitService.js"></script>
-	<script src="app/controllers/security/permitController.js"></script>
-	<script src="app/services/security/userofficeService.js"></script>
-	<script src="app/controllers/security/userofficeController.js"></script>
-	<script src="app/services/driver/drivertypeService.js"></script>
-	<script src="app/controllers/driver/drivertypeController.js"></script>
-	<script src="app/services/driver/driverService.js"></script>
-	<script src="app/controllers/driver/driverController.js"></script>
-	<script src="app/services/bus/bustypeService.js"></script>
-	<script src="app/controllers/bus/bustypeController.js"></script>
-	<script src="app/services/bus/busService.js"></script>
-	<script src="app/controllers/bus/busController.js"></script>
-	<script src="app/services/course/destinationService.js"></script>
-	<script src="app/controllers/course/destinationController.js"></script>
-	<script src="app/services/course/courseService.js"></script>
-	<script src="app/controllers/course/courseController.js"></script>
-	<script src="app/services/course/officeService.js"></script>
-	<script src="app/controllers/course/officeController.js"></script>
-	<script src="app/services/sales/orderbookService.js"></script>
-	<script src="app/controllers/sales/orderbookController.js"></script>
-	<script src="app/services/sales/salesbookService.js"></script>
-	<script src="app/controllers/sales/invalidateController.js"></script>
-	<script src="app/controllers/sales/invoiceController.js"></script>
-	<script src="app/services/sales/invoiceService.js"></script>
-	<script src="app/controllers/schedule/travelController.js"></script>
-	<script src="app/services/schedule/travelService.js"></script>
-	<script src="app/controllers/schedule/scheduleController.js"></script>
-	<script src="app/services/schedule/scheduleService.js"></script>
-	<script src="app/controllers/sales/ticketController.js"></script>
-	<script src="app/services/sales/ticketService.js"></script>
-	<script src="app/controllers/manifest/manifestController.js"></script>
-	<script src="app/controllers/report/dailycashController.js"></script>
-	<script src="app/controllers/report/dailybusController.js"></script>
-	<script src="app/controllers/report/dailysaleController.js"></script>
-	<script src="app/controllers/report/voidedinvoiceController.js"></script>
-	<script src="app/services/sales/saleService.js"></script>
-	<script src="app/services/common/commonService.js"></script>
+<!--Controller and Services-->
+<script src="app/controllers/home/homeController.js"></script>
+<script src="app/services/home/homeService.js"></script>
+<script src="app/controllers/home/loginController.js"></script>
+<script src="app/services/home/loginService.js"></script>
+<script src="app/services/security/settingService.js"></script>
+<script src="app/controllers/security/settingController.js"></script>
+<script src="app/services/security/moduleService.js"></script>
+<script src="app/controllers/security/moduleController.js"></script>
+<script src="app/services/security/pageService.js"></script>
+<script src="app/controllers/security/pageController.js"></script>
+<script src="app/services/security/userService.js"></script>
+<script src="app/controllers/security/userController.js"></script>
+<script src="app/services/security/roleService.js"></script>
+<script src="app/controllers/security/roleController.js"></script>
+<script src="app/services/security/permitService.js"></script>
+<script src="app/controllers/security/permitController.js"></script>
+<script src="app/services/security/userofficeService.js"></script>
+<script src="app/controllers/security/userofficeController.js"></script>
+<script src="app/services/driver/drivertypeService.js"></script>
+<script src="app/controllers/driver/drivertypeController.js"></script>
+<script src="app/services/driver/driverService.js"></script>
+<script src="app/controllers/driver/driverController.js"></script>
+<script src="app/services/bus/bustypeService.js"></script>
+<script src="app/controllers/bus/bustypeController.js"></script>
+<script src="app/services/bus/busService.js"></script>
+<script src="app/controllers/bus/busController.js"></script>
+<script src="app/services/course/destinationService.js"></script>
+<script src="app/controllers/course/destinationController.js"></script>
+<script src="app/services/course/courseService.js"></script>
+<script src="app/controllers/course/courseController.js"></script>
+<script src="app/services/course/officeService.js"></script>
+<script src="app/controllers/course/officeController.js"></script>
+<script src="app/services/sales/orderbookService.js"></script>
+<script src="app/controllers/sales/orderbookController.js"></script>
+<script src="app/services/sales/salesbookService.js"></script>
+<script src="app/controllers/sales/invalidateController.js"></script>
+<script src="app/controllers/sales/invoiceController.js"></script>
+<script src="app/services/sales/invoiceService.js"></script>
+<script src="app/controllers/schedule/travelController.js"></script>
+<script src="app/services/schedule/travelService.js"></script>
+<script src="app/controllers/schedule/scheduleController.js"></script>
+<script src="app/services/schedule/scheduleService.js"></script>
+<script src="app/controllers/sales/ticketController.js"></script>
+<script src="app/services/sales/ticketService.js"></script>
+<script src="app/controllers/manifest/manifestController.js"></script>
+<script src="app/controllers/report/dailycashController.js"></script>
+<script src="app/controllers/report/dailybusController.js"></script>
+<script src="app/controllers/report/dailysaleController.js"></script>
+<script src="app/controllers/report/voidedinvoiceController.js"></script>
+<script src="app/services/sales/saleService.js"></script>
+<script src="app/services/common/commonService.js"></script>
 
-	<!-- Select2 -->
-	<script>
-      $(document).ready(function() {		  
-        $(".select2_single").select2({
-          placeholder: "Select a state",
-          allowClear: true
-        });
-        $(".select2_group").select2({});
-        $(".select2_multiple").select2({
-          maximumSelectionLength: 4,
-          placeholder: "With Max Selection limit 4",
-          allowClear: true
-        });
-      });
-    </script>
-	<!-- /Select2 -->
+<!-- Select2 -->
+<script>
+	$(document).ready(function () {
+		$(".select2_single").select2({
+			placeholder: "Select a state",
+			allowClear: true
+		});
+		$(".select2_group").select2({});
+		$(".select2_multiple").select2({
+			maximumSelectionLength: 4,
+			placeholder: "With Max Selection limit 4",
+			allowClear: true
+		});
+	});
+</script>
+<!-- /Select2 -->
 </body>
 
 </html>
