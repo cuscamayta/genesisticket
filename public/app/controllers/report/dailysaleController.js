@@ -67,8 +67,7 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
 
         setTimeout(function () {
             OpenWindowWithPost(host + ":3001/salesbooks/Excel", "Ventas diarias", $scope.filters);
-
-        }, 5000);
+        }, 3000);
     };
 
     function OpenWindowWithPost(url, name, params, windowOptions) {

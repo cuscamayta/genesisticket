@@ -9,7 +9,7 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="x_content">
-				<div id="step-0" class="content" style="display: block;">
+				<div id="step-0" class="content displayBlock">
 					<form class="form-horizontal form-label-left">
 						<div class="form-group">
 							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateinit">Fecha <span class="required">*</span></label>
@@ -38,7 +38,7 @@
 					</form>
 				</div>
 
-				<div id="step-1" class="content" style="display: none;">
+				<div id="step-1" class="content displayNone">
 					<form class="form-horizontal form-label-left">
 						<div class="col-md-12">
 							<div class="x_panel">
@@ -81,7 +81,7 @@
 
 					</form>
 				</div>
-				<div id="step-2" class="content" style="display: none;">
+				<div id="step-2" class="content displayNone">
 
 					<div class="row">
 						<div ng-include="bustypepath"></div>
@@ -115,7 +115,7 @@
 													<td>{{ticket.numberseat}}</td>
 													<td>{{ticket.fullName}}</td>
 													<td>{{ticket.numberid}}</td>
-													<td style="text-align: right;">{{ticket.price}}</td>
+													<td class="textRight">{{ticket.price}}</td>
 													<td>{{ticket.numberbaggage}}</td>
 													<td>{{ticket.weightbaggage}}</td>
 													<td ng-click="deleteticketdetail(ticket)"><i class="fa fa-trash" title="Eliminar"></i></td>
@@ -126,8 +126,8 @@
 												<tr>
 													<td></td>
 													<td></td>
-													<td style="text-align: right; font-weight: bold;">Total</td>
-													<td style="text-align: right; font-weight: bold;">{{ sumTotal }}</td>
+													<td class="textRightBold">Total</td>
+													<td class="textRightBold">{{ sumTotal }}</td>
 													<td></td>
 													<td></td>
 													<td></td>
@@ -181,8 +181,8 @@
 		</div>
 	</div>
 </div>
-<div id="modaleditcustomer" class="modal fade bs-example-modal-sm hidden-print" tabindex="-1" travel="dialog" aria-hidden="true"
-	style="display: none;">
+<div id="modaleditcustomer" class="modal fade bs-example-modal-sm hidden-print displayNone" tabindex="-1" travel="dialog"
+	aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -194,7 +194,7 @@
 					<p></p>
 
 					<label for="price">Precio <span class="required">*</span>
-					<span style="font-size: 8pt; font-weight: 100; font-style: italic;">   [Mínimo: {{selectedschedule.pricemin}}; Máximo: {{selectedschedule.pricemax}}]</span> </label>
+					<span class="textNote"> [Mínimo: {{selectedschedule.pricemin}}; Máximo: {{selectedschedule.pricemax}}]</span></label>
 					<input type="number" id="price" class="form-control" ngfocus validate="number" required ng-model="price">
 
 					<label for="numberidcustomer">Nro identidad <span class="required">*</span></label>
@@ -218,23 +218,23 @@
 	</div>
 </div>
 
-<div style="width: 265px; font-size: 11px;" id="invoice-file">
-	<p style="text-align: center"><b>{{datainvoice.titleCompany}}</b></p>
-	<p style="text-align: center">{{datainvoice.titleOffice}}<br /> {{datainvoice.addressOffice}} Telf: {{datainvoice.phoneOffice}}<br /> {{datainvoice.detailOffice}}</p>
-	<p style="text-align: center">------------------------------------------------------------</p>
-	<p style="text-align: center">FACTURA ORIGINAL</p>
-	<p style="text-align: center">------------------------------------------------------------</p>
-	<p style="text-align: center">NIT: {{datainvoice.numberidCompany}}<br /> FACTURA Nro: {{datainvoice.numberInvoice}}<br /> AUTORIZACION: {{datainvoice.numberorderInvoice}}</p>
-	<p style="text-align: center">------------------------------------------------------------</p>
-	<p style="text-align: center">FECHA: {{datainvoice.dateInvoice}}<br /> SENOR(es): {{datainvoice.nameInvoice}}<br /> NIT/CI: {{datainvoice.numbernitInvoice}}</p>
+<div class="sizeTicket" id="invoice-file">
+	<p class="textCenter"><b>{{datainvoice.titleCompany}}</b></p>
+	<p class="textCenter">{{datainvoice.titleOffice}}<br /> {{datainvoice.addressOffice}} Telf: {{datainvoice.phoneOffice}}<br /> {{datainvoice.detailOffice}}</p>
+	<p class="textCenter">------------------------------------------------------------</p>
+	<p class="textCenter">FACTURA ORIGINAL</p>
+	<p class="textCenter">------------------------------------------------------------</p>
+	<p class="textCenter">NIT: {{datainvoice.numberidCompany}}<br /> FACTURA Nro: {{datainvoice.numberInvoice}}<br /> AUTORIZACION: {{datainvoice.numberorderInvoice}}</p>
+	<p class="textCenter">------------------------------------------------------------</p>
+	<p class="textCenter">FECHA: {{datainvoice.dateInvoice}}<br /> SENOR(es): {{datainvoice.nameInvoice}}<br /> NIT/CI: {{datainvoice.numbernitInvoice}}</p>
 
 	<table class="table">
 		<thead>
 			<tr>
-				<th style="text-align: center">CANT.</th>
-				<th style="text-align: center">DESCRIPCION</th>
-				<th style="text-align: center">PRECIO</th>
-				<th style="text-align: center">TOTAL</th>
+				<th class="textCenter">CANT.</th>
+				<th class="textCenter">DESCRIPCION</th>
+				<th class="textCenter">PRECIO</th>
+				<th class="textCenter">TOTAL</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -253,17 +253,17 @@
 		</tfoot>
 	</table>
 	<p>Son: {{datainvoice.totalliteral}}</p>
-	<p style="text-align: center">------------------------------------------------------------</p>
+	<p class="textCenter">------------------------------------------------------------</p>
 	<p>CÓDIGO DE CONTROL: {{datainvoice.codecontrolInvoice}}</p>
 	<p>FECHA LIMITE DE EMISION {{datainvoice.deadline}}</p>
-	<p style="text-align: center">Salida {{datainvoice.date}} Hrs. {{datainvoice.arrival}}</p>
+	<p class="textCenter">Salida {{datainvoice.date}} Hrs. {{datainvoice.arrival}}</p>
 	<p><label id="qrinvoice"></label></p>
 
-	<p style="text-align: center">{{datainvoice.noteCompany}}</p>
+	<p class="textCenter">{{datainvoice.noteCompany}}</p>
 
-	<p style="text-align: center">------------------------------------------------------------
+	<p class="textCenter">------------------------------------------------------------
 		<br /> GRACIAS POR SU PREFERENCIA</p>
-	<p style="text-align: center">------------------------------------------------------------</p>
+	<p class="textCenter">------------------------------------------------------------</p>
 
 	<i>i</i>
 	<div ng-repeat="detail in detailinvoice" class="ticket">
@@ -272,7 +272,7 @@
 		<p>Bus: {{detail.typebus}}</p>
 		<p>Salida: {{datainvoice.date}} Hrs: {{datainvoice.arrival}}</p>
 		<p>Nombre: {{detail.fullname}} CI: {{detail.numberid}}</p>
-		<p style="text-align: center">Bs {{detail.price}}</p><br /><br />
+		<p class="textCenter">Bs {{detail.price}}</p><br /><br />
 		<i>i</i>
 	</div>
 

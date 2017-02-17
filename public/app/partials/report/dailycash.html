@@ -31,7 +31,8 @@
 
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="generatedailycash()" title="Generar reporte">Generar</button>
-                            <button type="button" class="btn btn-primary" ng-show="listsales.length > 0" ng-click="printReport()" title="Imprimir reporte">Imprimir</button>
+                            <button type="button" class="btn btn-primary" ng-show="listsales.length > 0" ng-click="printReport()" title="Imprimir reporte">
+                               <i class="fa fa-print"></i> Imprimir</button>
                         </div>
                     </div>
 
@@ -81,6 +82,7 @@
         </div>
     </div>
 </div>
+
 <div id="dataPrint" ng-show="false">
     <h2>Arqueo de caja</h2>
     <small>

@@ -32,7 +32,8 @@
 
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="generatedailysale()" title="Generar reporte">Generar</button>
-                            <button type="button" class="btn btn-primary" ng-show="listsales.length > 0" ng-click="exportdailysale();" title="Exportar a Excel">Exportar</button>
+                            <button type="button" class="btn btn-primary" ng-show="listsales.length > 0" ng-click="exportdailysale();" title="Exportar a Excel">
+                                <i class="fa fa-download"></i> Exportar</button>
                         </div>
                     </div>
 
@@ -47,11 +48,11 @@
                                                 <th>#</th>
                                                 <th>Fecha</th>
                                                 <th>Nro orden</th>
-                                                <th>Código control</th>
                                                 <th>Nro factura</th>
-                                                <th>Nro NIT</th>
-                                                <th>Nombre</th>
                                                 <th>Importe</th>
+                                                <th>Nombre</th>
+                                                <th>Nro NIT</th>
+                                                <th>Código control</th>
                                                 <th>Sucursal</th>
                                             </tr>
                                         </thead>
@@ -60,11 +61,11 @@
                                                 <td>{{$index + 1}}</td>
                                                 <td>{{sale.dateregister}}</td>
                                                 <td>{{sale.numberorder}}</td>
-                                                <td>{{sale.numbercontrol}}</td>
-                                                <td>{{sale.numberinvoice}}</td>
-                                                <td>{{sale.numberid}}</td>
+                                                <td class="textRight">{{sale.numberinvoice}}</td>
+                                                <td class="textRight">{{sale.amountinvoice}}</td>
                                                 <td>{{sale.fullname}}</td>
-                                                <td style="text-align: right;">{{sale.amountinvoice}}</td>
+                                                <td>{{sale.numberid}}</td>
+                                                <td>{{sale.numbercontrol}}</td>
                                                 <td>{{sale.Office.title}}</td>
                                             </tr>
                                         </tbody>
@@ -73,11 +74,10 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                <td class="textRightBold">Total</td>
+                                                <td class="textRightBold">{{ sumTotal }}</td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
-                                                <td style="font-weight: bold;">Total</td>
-                                                <td style="text-align: right; font-weight: bold;">{{ sumTotal }}</td>
                                                 <td></td>
                                             </tr>
                                         </tfoot>

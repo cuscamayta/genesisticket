@@ -49,10 +49,10 @@ router.post('/Excel', function (request, response) {
         caption: 'Nro Orden',
         type: 'number'
     }, {
-        caption: 'Código de Control',
-        type: 'string'
-    }, {
         caption: 'Nro de Factura',
+        type: 'number'
+    }, {
+        caption: 'Importe',
         type: 'number'
     }, {
         caption: 'Nombre',
@@ -61,8 +61,8 @@ router.post('/Excel', function (request, response) {
         caption: 'Nro NIT',
         type: 'number'
     }, {
-        caption: 'Importe',
-        type: 'number'
+        caption: 'Código de Control',
+        type: 'string'
     }, {
         caption: 'Sucursal',
         type: 'string'
@@ -76,11 +76,11 @@ router.post('/Excel', function (request, response) {
         var rowData = new Array(
             dataList[i].dateregister,
             dataList[i].numberorder,
-            dataList[i].numbercontrol,
             dataList[i].numberinvoice,
-            dataList[i].numberid,
-            dataList[i].fullname,
             dataList[i].amountinvoice,
+            dataList[i].fullname,
+            dataList[i].numberid,
+            dataList[i].numbercontrol,
             dataList[i].Office.title);
         conf.rows.push(rowData);
     }

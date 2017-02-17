@@ -61,4 +61,20 @@ app.controller('DailybusController', function ($scope, SaleService, BusService, 
         return $scope.filters == null || $scope.filters.dateinit == null
             || $scope.filters.dateend == null || $scope.selectedbus == null;
     };
+
+    $scope.printReport = function () {
+        if (isIE())
+            Print();
+        else
+            setTimeout(function () {
+                window.print();
+            }, 100);
+    };
+
+    function isIE() {
+        if (navigator.appName == 'Microsoft Internet Explorer' || !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv 11/)) || (typeof $.browser !== "undefined" && $.browser.msie == 1)) {
+            return true;
+        }
+        return false;
+    }
 });
