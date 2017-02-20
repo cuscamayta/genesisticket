@@ -28,6 +28,8 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
         }).on('apply.daterangepicker', function(ev, picker) {
             $scope.filter.dateend = picker.startDate.format('DD/MM/YYYY');
         });
+
+        $("#manifes-file").hide();
     }
 
     function gettravels() {

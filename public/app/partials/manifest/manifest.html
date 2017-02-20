@@ -86,6 +86,23 @@
                                     <table class="table table-striped jambo_table bulk_action">
                                         <thead class="headings">
                                             <tr>
+                                                <th colspan="4" class="textCenter">MANIFIESTO DE PASAJEROS</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even pointer">
+                                                <td><b>FECHA:</b> {{listticket[0].Schedule.dateregister}}</td>
+                                                <td><b>Salida:</b> {{listticket[0].origin}} <b>Hr:</b>{{listticket[0].Schedule.arrival}}</td>
+                                                <td><b>Llegada:</b> {{listticket[0].destination}} <b>Hr:</b> {{listticket[0].Schedule.departure}}
+                                                    </td>
+                                                <td><b>Tipo Bus:</b> {{listticket[0].typebus}} <b>Placa:</b> {{listticket[0].Bus.numberid}}</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead class="headings">
+                                            <tr>
                                                 <th>Nombre</th>
                                                 <th>Nro Licencia</th>
                                                 <th>Tipo</th>
@@ -132,10 +149,10 @@
 <div class="sizeTicket" id="manifes-file">
     <p class="textCenter"><b>MANIFIESTO DE PASAJEROS</b></p>
     <p class="textCenter">------------------------------------------------------------</p>
-    <p class="textCenter"><b>FECHA:</b> {{listticket[0].Schedule.dateregister}}<br /> 
-    <b>Salida:</b> {{listticket[0].origin}}   <b>Hr:</b>{{listticket[0].Schedule.arrival}}<br/>
-    <b>Llegada:</b> {{listticket[0].destination}}   <b>Hr:</b> {{listticket[0].Schedule.departure}}<br/>
-    <b>Tipo Bus:</b> {{listticket[0].typebus}}   <b>Placa:</b> {{listticket[0].Bus.numberid}}</p>
+    <p class="textCenter"><b>FECHA:</b> {{listticket[0].Schedule.dateregister}}<br />
+        <b>Salida:</b> {{listticket[0].origin}} <b>Hr:</b>{{listticket[0].Schedule.arrival}}<br/>
+        <b>Llegada:</b> {{listticket[0].destination}} <b>Hr:</b> {{listticket[0].Schedule.departure}}<br/>
+        <b>Tipo Bus:</b> {{listticket[0].typebus}} <b>Placa:</b> {{listticket[0].Bus.numberid}}</p>
 
     <table class="table">
         <thead class="table">
