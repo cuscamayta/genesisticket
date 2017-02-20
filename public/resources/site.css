@@ -4,6 +4,10 @@
     text-align: right;    
 }
 
+.textLeft{
+    text-align: left;    
+}
+
 .textRightBold{
     text-align: right;
     font-weight: bold;   

@@ -71,6 +71,7 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
                 toastr.error(res.message);
             }
             else {
+                debugger;
                 $scope.showblack = false;
                 $scope.listticket = res.data;
                 if ($scope.listticket.length > 0) {
@@ -87,4 +88,20 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
         $("#step-2").css("display", "none");
         $("#step-1").css("display", "block");
     };
+
+     $scope.printReport = function () {
+        if (isIE())
+            Print();
+        else
+            setTimeout(function () {
+                window.print();
+            }, 100);
+    };
+
+    function isIE() {
+        if (navigator.appName == 'Microsoft Internet Explorer' || !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv 11/)) || (typeof $.browser !== "undefined" && $.browser.msie == 1)) {
+            return true;
+        }
+        return false;
+    }
 });
