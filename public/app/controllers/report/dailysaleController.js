@@ -30,7 +30,9 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
     }
 
     function getoffices() {
-        var response = OfficeService.getofficesforselect();
+        debugger;
+        $scope.filters.iduser = $rootScope.currentUser.user.id;
+        var response = OfficeService.getofficesforselect($scope.filters);
         response.then(function (res) {
             if (!res.isSuccess) {
                 toastr.error(res.message);

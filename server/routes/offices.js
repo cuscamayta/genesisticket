@@ -43,9 +43,10 @@ router.get('/', common.isAuthenticate, function (request, response) {
   });
 });
 
-router.get('/forselect', common.isAuthenticate, function (request, response) {
+router.post('/forselect', common.isAuthenticate, function (request, response) {
   models.Office.findAll({
-    attributes: ["id", "title"]
+    attributes: ["id", "title"],
+    include: [{ model: models.Useroffice, where: { iduser: request.body.iduser } }]
   }).then(function (res) {
     response.send(common.response(res));
   }).catch(function (err) {

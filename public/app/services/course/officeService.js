@@ -29,9 +29,9 @@ app.service('OfficeService', function ($http, $q) {
         return defer.promise;
     };
 
-    this.getofficesforselect = function () {
+    this.getofficesforselect = function (filter) {
         var defer = $q.defer();
-        $http.get('/offices/forselect').success(function (response) {
+        $http.post('/offices/forselect', filter).success(function (response) {
             defer.resolve(response);
         });
         return defer.promise;

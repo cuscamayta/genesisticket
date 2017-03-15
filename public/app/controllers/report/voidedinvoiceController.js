@@ -2,7 +2,7 @@ app.controller('VoidedinvoiceController', function ($scope, SalesbookService, Of
     init();
 
     function init() {
-        getoffices();
+        
         $scope.selectedschedule = null;
         $scope.lissales = [];
 
@@ -17,10 +17,14 @@ app.controller('VoidedinvoiceController', function ($scope, SalesbookService, Of
         }).on('apply.daterangepicker', function (ev, picker) {
             $scope.filters.dateregister = picker.startDate.format('DD/MM/YYYY');
         });
+
+        getoffices();
     }
 
     function getoffices() {
-        var response = OfficeService.getofficesforselect();
+        debugger;
+        $scope.filters.iduser = $rootScope.currentUser.user.id;
+        var response = OfficeService.getofficesforselect($scope.filters);
         response.then(function (res) {
             if (!res.isSuccess) {
                 toastr.error(res.message);

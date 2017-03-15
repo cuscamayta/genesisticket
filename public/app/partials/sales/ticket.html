@@ -15,14 +15,14 @@
 							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateinit">Fecha <span class="required">*</span></label>
 							<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
 								<input type="text" id="dateinit" class="form-control has-feedback-left active" ngfocus order="1" ng-model="filtertravel.dateinit"
-									validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+								 validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
 								<span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
 								<span id="inputSuccess2Status" class="sr-only">(success)</span>
 							</div>
 							<label class="control-label col-md-1 col-sm-1 col-xs-12" for="dateend">Hasta <span class="required">*</span></label>
 							<div class="col-md-2 col-sm-2 col-xs-12 form-group has-feedback">
 								<input type="text" id="dateend" class="form-control has-feedback-left active" ngfocus order="1" ng-model="filtertravel.dateend"
-									validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+								 validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
 								<span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
 								<span id="inputSuccess2Status" class="sr-only">(success)</span>
 							</div>
@@ -153,18 +153,18 @@
 										<label for="dateregister">Fecha <span class="required">*</span></label>
 										<div class="form-group has-feedback">
 											<input type="text" id="dateregister" class="form-control has-feedback-left active" ngfocus ng-model="headerticket.dateregister"
-												validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
+											 validate="date" required data-inputmask="'mask': '99/99/9999'" aria-describedby="inputSuccess2Status">
 											<span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
 											<span id="inputSuccess2Status" class="sr-only">(success)</span>
 										</div>
 
 										<label for="numbernitinvoice">Nro de NIT <span class="required">*</span></label>
 										<input type="text" id="numbernitinvoice" class="form-control textUpperCase" ngfocus ng-model="headerticket.numbernitinvoice"
-											validate="number" required>
+										 validate="number" required>
 
 										<label for="nameinvoice">Nombre para la factura <span class="required">*</span></label>
 										<input type="text" id="nameinvoice" class="form-control textUpperCase" ngfocus ng-model="headerticket.nameinvoice" validate="text-number"
-											required>
+										 required>
 
 										<div class="ln_solid"></div>
 										<div>
@@ -182,7 +182,7 @@
 	</div>
 </div>
 <div id="modaleditcustomer" class="modal fade bs-example-modal-sm hidden-print displayNone" tabindex="-1" travel="dialog"
-	aria-hidden="true">
+ aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -193,8 +193,7 @@
 				<form class="form-horizontal form-label-left">
 					<p></p>
 
-					<label for="price">Precio <span class="required">*</span>
-					<span class="textNote"> [Mínimo: {{selectedschedule.pricemin}}; Máximo: {{selectedschedule.pricemax}}]</span></label>
+					<label for="price">Precio <span class="required">*</span></label>
 					<input type="number" id="price" class="form-control" ngfocus validate="number" required ng-model="price">
 
 					<label for="numberidcustomer">Nro identidad <span class="required">*</span></label>
@@ -256,7 +255,8 @@
 	<p class="textCenter">------------------------------------------------------------</p>
 	<p>CÓDIGO DE CONTROL: {{datainvoice.codecontrolInvoice}}</p>
 	<p>FECHA LIMITE DE EMISION {{datainvoice.deadline}}</p>
-	<p class="textCenter">Salida {{datainvoice.date}} Hrs. {{datainvoice.arrival}}</p>
+	<p>Usuario: {{datainvoice.user}}</p>
+	<p class="textCenter">Salida {{datainvoice.date}} Hrs. {{datainvoice.arrival}}</p>	
 	<p><label id="qrinvoice"></label></p>
 
 	<p class="textCenter">{{datainvoice.noteCompany}}</p>

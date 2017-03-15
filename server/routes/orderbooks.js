@@ -63,7 +63,7 @@ router.post('/updatenumberinvoice', common.isAuthenticate, function (request, re
 
 router.get('/', common.isAuthenticate, function (request, response) {
   models.Orderbook.findAll({
-    include: [models.Office]
+    include: [ models.Office ]
   }).then(function (res) {
     response.send(common.response(res));
   }).catch(function (err) {

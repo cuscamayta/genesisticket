@@ -316,6 +316,7 @@ app.controller('TicketController', function ($scope, TicketService, ScheduleServ
                     $scope.datainvoice.date = res.data.invoice.Sales.first().Schedule.dateregister;
                     $scope.datainvoice.arrival = res.data.invoice.Sales.first().Schedule.arrival;
                     $scope.datainvoice.departure = res.data.invoice.Sales.first().Schedule.departure;
+                    $scope.datainvoice.user = res.data.invoice.Sales.first().User.username;
                     $scope.detailinvoice = res.data.invoice.Sales.first().Tickets;
                     var totalformat = parseFloat(Math.round(res.data.invoice.Sales.first().total * 100) / 100).toFixed(2);
                     $scope.datainvoice.totalliteral = Convertir(totalformat);
