@@ -69,12 +69,13 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
         $scope.filters.idoffice = $scope.selectedoffice.id;
         var protocol = location.protocol;
         var slashes = protocol.concat("//");
-        var host = slashes.concat(window.location.hostname);
+        var host = slashes.concat(window.location.hostname),
+            port = window.location.port == "" ? "" : ":" + window.location.port;
 
         $scope.filters.list = JSON.stringify($scope.listsales);
 
         setTimeout(function () {
-            OpenWindowWithPost(host + "/salesbooks/Excel", "Ventas diarias", $scope.filters);
+            OpenWindowWithPost(host + port + "/salesbooks/Excel", "Ventas diarias", $scope.filters);
         }, 3000);
     };
 
