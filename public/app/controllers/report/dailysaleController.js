@@ -30,6 +30,9 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
         });
     }
 
+    $scope.getStatus = function (status) {
+        return status == 1 ? 'V' : 'A';
+    }
     function getoffices() {
         $scope.filters.iduser = $rootScope.currentUser.user.id;
         var response = OfficeService.getofficesforselect($scope.filters);
@@ -39,7 +42,9 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
             }
             else {
                 $scope.listoffice = res.data;
-                $scope.listoffice.push({ "title": "[Todos]", "id": "0" });
+                var allOption = { "title": "[Todos]", "id": "0" };
+                $scope.listoffice.push(allOption);
+                $scope.selectedoffice = allOption;
             }
         });
     }

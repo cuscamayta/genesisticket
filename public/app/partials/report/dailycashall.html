@@ -100,38 +100,50 @@
     <small>
         Usuario: {{selecteduser.fullName}}
     </small>
-    <table ng-show="listsales.length > 0" class="table table-striped jambo_table bulk_action">
-        <thead class="headings">
-            <tr>
-                <th>#</th>
-                <th>Fecha</th>
-                <th>Hora salida</th>
-                <th>Hora llegada</th>
-                <th>Total</th>
-                <th>Usuario</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="even pointer" ng-repeat="sale in listsales" ng-class="{selectelement:saleselected.id==sale.id}">
-                <td>{{$index + 1}}</td>
-                <td>{{sale.dateregister}}</td>
-                <td>{{sale.arrival}}</td>
-                <td>{{sale.departure}}</td>
-                <td class="textRight">{{sale.total}}</td>
-                <td>{{sale.User.fullName}}</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="textBold">Total</td>
-                <td class="textRightBold">{{ sumTotal }}</td>
-                <td></td>
-            </tr>
-        </tfoot>
-    </table>
+   <table ng-show="listsales.length > 0" class="table table-striped jambo_table bulk_action">
+                                        <thead class="headings">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Nombre</th>
+                                                <th>NIT/CI</th>
+                                                <th>Nro Factura</th>
+                                                <th>Nro Orden</th>
+                                                <th>Codigo Control</th>
+                                                <th>Total</th>
+                                                <th>Usuario</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="even pointer" ng-repeat="sale in listsales" ng-class="{selectelement:saleselected.id==sale.id}">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{sale.dateregister}}</td>
+                                                <td>{{sale.arrival}} / {{sale.departure}}</td>
+                                                <td>{{sale.Salesbook.fullname}}</td>
+                                                <td>{{sale.Salesbook.numberid}}</td>
+                                                <td class="textRight">{{sale.Salesbook.numberinvoice}}</td>
+                                                <td>{{sale.Salesbook.numberorder}}</td>
+                                                <td>{{sale.Salesbook.numbercontrol}}</td>
+                                                <td class="textRight">{{sale.total}}</td>
+                                                <td>{{sale.User.fullName}}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="textBold">Total</td>
+                                                <td class="textRightBold">{{ sumTotal }}</td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
 </div>
 
 <style>

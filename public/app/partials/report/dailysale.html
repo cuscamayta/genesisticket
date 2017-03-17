@@ -54,6 +54,7 @@
                                                 <th>Nombre</th>
                                                 <th>Nro NIT</th>
                                                 <th>Código control</th>
+                                                <th>Estado</th>
                                                 <th>Sucursal</th>
                                             </tr>
                                         </thead>
@@ -67,6 +68,7 @@
                                                 <td>{{sale.fullname}}</td>
                                                 <td>{{sale.numberid}}</td>
                                                 <td>{{sale.numbercontrol}}</td>
+                                                <td>{{getStatus(sale.status) }}</td>
                                                 <td>{{sale.Office.title}}</td>
                                             </tr>
                                         </tbody>

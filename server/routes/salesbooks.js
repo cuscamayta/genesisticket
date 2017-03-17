@@ -78,6 +78,9 @@ router.post('/Excel', function (request, response) {
     }, {
         caption: 'Código de Control',
         type: 'string'
+    },{
+        caption: 'Estado',
+        type: 'string'
     }, {
         caption: 'Sucursal',
         type: 'string'
@@ -96,6 +99,7 @@ router.post('/Excel', function (request, response) {
             dataList[i].fullname,
             dataList[i].numberid,
             dataList[i].numbercontrol,
+            dataList[i].status == 1 ? 'V':'A',
             dataList[i].Office.title);
         conf.rows.push(rowData);
     }

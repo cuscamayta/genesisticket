@@ -37,11 +37,21 @@ app.controller('DailycashallController', function ($scope, SaleService, UserServ
             }
             else {
                 $scope.listuser = res.data;
-                $scope.listuser.push({ "fullName": "[Todos]", "id": "0" });
+                var allOption = { "fullName": "[Todos]", "id": "0" };
+                $scope.listuser.push(allOption);
+                $scope.selecteduser = allOption;
             }
         });
     }
 
+    $scope.data = {
+        availableOptions: [
+            { id: '1', name: 'Option A' },
+            { id: '2', name: 'Option B' },
+            { id: '3', name: 'Option C' }
+        ],
+        selectedOption: { id: '2', name: 'Option B' } //This sets the default value of the select in the ui
+    };
     $scope.generatedailycash = function () {
         $scope.filters.iduser = $scope.selecteduser.id;
 
