@@ -27,7 +27,8 @@
                         </div>
 
                         <div class="col-md-3 col-sm-3 col-xs-12">
-                            <select id="idoffice" class="form-control" ng-options="office.title for office in listoffice" ng-model="selectedoffice" required></select>
+                            <select id="idoffice" class="form-control" ng-options="office.title for office in listoffice" ng-model="selectedoffice" required ng-selected="0">
+                            </select>
                         </div>
 
                         <div class="col-md-3 col-sm-3 col-xs-12">
@@ -76,6 +77,7 @@
                                                 <td></td>
                                                 <td class="textRightBold">Total</td>
                                                 <td class="textRightBold">{{ sumTotal }}</td>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>

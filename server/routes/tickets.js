@@ -139,7 +139,7 @@ router.post('/create', common.isAuthenticate, function (request, response) {
                             });
                         }
                     } else {
-                        throw new Error("No existe libro de orden");
+                        throw new Error("No existe libro de orden, o no esta en uso");
                     }
                 });
             } else {

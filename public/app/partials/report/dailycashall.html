@@ -25,6 +25,10 @@
                             <span id="inputSuccess2Status" class="sr-only">(success)</span>
                         </div>
 
+                        <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
+                            <select id="iduser" class="form-control" ng-options="user.fullName for user in listuser" ng-model="selecteduser" required></select>
+                        </div>
+
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <button type="button" class="btn btn-primary" ng-disabled="validatecontrols()" ng-click="generatedailycash()" title="Generar reporte">Generar</button>
                             <button type="button" class="btn btn-primary" ng-show="listsales.length > 0" ng-click="printReport()" title="Imprimir reporte">
@@ -42,8 +46,12 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Fecha</th>
-                                                <th>Hora salida</th>
-                                                <th>Hora llegada</th>
+                                                <th>Hora</th>
+                                                <th>Nombre</th>
+                                                <th>NIT/CI</th>
+                                                <th>Nro Factura</th>
+                                                <th>Nro Orden</th>
+                                                <th>Codigo Control</th>
                                                 <th>Total</th>
                                                 <th>Usuario</th>
                                             </tr>
@@ -52,14 +60,22 @@
                                             <tr class="even pointer" ng-repeat="sale in listsales" ng-class="{selectelement:saleselected.id==sale.id}">
                                                 <td>{{$index + 1}}</td>
                                                 <td>{{sale.dateregister}}</td>
-                                                <td>{{sale.arrival}}</td>
-                                                <td>{{sale.departure}}</td>
+                                                <td>{{sale.arrival}} / {{sale.departure}}</td>
+                                                <td>{{sale.Salesbook.fullname}}</td>
+                                                <td>{{sale.Salesbook.numberid}}</td>
+                                                <td class="textRight">{{sale.Salesbook.numberinvoice}}</td>
+                                                <td>{{sale.Salesbook.numberorder}}</td>
+                                                <td>{{sale.Salesbook.numbercontrol}}</td>
                                                 <td class="textRight">{{sale.total}}</td>
                                                 <td>{{sale.User.fullName}}</td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -119,22 +135,22 @@
 </div>
 
 <style>
-	@media print {
-		label {
-			display: block;
-			margin: 5px 0;
-		}        
-		#dataPrint {
-			font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
-			font-weight: normal;
-			font-style: normal;
-			width: 100% !important;
-			font-size: 14px !important;
-			text-align: center;
-			display: block !important;
-		}		
-		#dataPrint .footer {
-			border-bottom: none;
-		}
-	}
+    @media print {
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+        #dataPrint {
+            font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            width: 100% !important;
+            font-size: 14px !important;
+            text-align: center;
+            display: block !important;
+        }
+        #dataPrint .footer {
+            border-bottom: none;
+        }
+    }
 </style>

@@ -1,8 +1,7 @@
-app.controller('DailycashController', function ($scope, SaleService, UserService, $rootScope) {
+app.controller('DailycashController', function ($scope, SaleService, $rootScope) {
     init();
 
     function init() {
-        getusers();
         $scope.selectedschedule = null;
         $scope.listsales = [];
 
@@ -29,20 +28,8 @@ app.controller('DailycashController', function ($scope, SaleService, UserService
         });
     }
 
-    function getusers() {
-        var response = UserService.getusersforselect();
-        response.then(function (res) {
-            if (!res.isSuccess) {
-                toastr.error(res.message);
-            }
-            else {
-                $scope.listuser = res.data;
-            }
-        });
-    }
-
     $scope.generatedailycash = function () {
-        $scope.filters.iduser = $scope.selecteduser.id;
+        $scope.filters.iduser = $rootScope.currentUser.user.id;
 
         var response = SaleService.getdailycash($scope.filters);
         response.then(function (res) {
@@ -59,8 +46,7 @@ app.controller('DailycashController', function ($scope, SaleService, UserService
     };
 
     $scope.validatecontrols = function () {
-        return $scope.filters == null || $scope.filters.dateinit == null
-            || $scope.filters.dateend == null || $scope.selecteduser == null;
+        return $scope.filters == null || $scope.filters.dateinit == null || $scope.filters.dateend == null;
     };
 
     $scope.printReport = function () {

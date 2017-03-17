@@ -2,13 +2,14 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
     init();
 
     function init() {
-        getoffices();
         $scope.selectedschedule = null;
         $scope.lissales = [];
 
         $scope.filters = {};
         $scope.filters.dateinit = moment().format('DD/MM/YYYY');
         $scope.filters.dateend = moment().format('DD/MM/YYYY');
+
+        getoffices();
 
         $('#dateinit').daterangepicker({
             locale: { format: 'DD/MM/YY' },
@@ -30,7 +31,6 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
     }
 
     function getoffices() {
-        debugger;
         $scope.filters.iduser = $rootScope.currentUser.user.id;
         var response = OfficeService.getofficesforselect($scope.filters);
         response.then(function (res) {
@@ -39,6 +39,7 @@ app.controller('DailysaleController', function ($scope, SalesbookService, Office
             }
             else {
                 $scope.listoffice = res.data;
+                $scope.listoffice.push({ "title": "[Todos]", "id": "0" });
             }
         });
     }

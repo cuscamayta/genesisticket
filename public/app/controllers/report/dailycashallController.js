@@ -1,15 +1,14 @@
-app.controller('InvalidateController', function ($scope, SalesbookService, OfficeService, TicketService, $rootScope) {
+app.controller('DailycashallController', function ($scope, SaleService, UserService, $rootScope) {
     init();
 
     function init() {
-        $scope.selectedsalebook = null;
-        $scope.listsalebook = [];
+        getusers();
+        $scope.selectedschedule = null;
+        $scope.listsales = [];
 
         $scope.filters = {};
         $scope.filters.dateinit = moment().format('DD/MM/YYYY');
         $scope.filters.dateend = moment().format('DD/MM/YYYY');
-
-        getoffices();
 
         $('#dateinit').daterangepicker({
             locale: { format: 'DD/MM/YY' },
@@ -30,52 +29,54 @@ app.controller('InvalidateController', function ($scope, SalesbookService, Offic
         });
     }
 
-    function getoffices() {
-        $scope.filters.iduser = $rootScope.currentUser.user.id;
-        var response = OfficeService.getofficesforselect($scope.filters);
+    function getusers() {
+        var response = UserService.getusersforselect();
         response.then(function (res) {
             if (!res.isSuccess) {
                 toastr.error(res.message);
             }
             else {
-                $scope.listoffice = res.data;
+                $scope.listuser = res.data;
+                $scope.listuser.push({ "fullName": "[Todos]", "id": "0" });
             }
         });
     }
 
-    $scope.getsalebooks = function () {
-        $scope.filters.idoffice = $scope.selectedoffice.id;
+    $scope.generatedailycash = function () {
+        $scope.filters.iduser = $scope.selecteduser.id;
 
-        var response = SalesbookService.getsalesbooksforselect($scope.filters);
+        var response = SaleService.getdailycash($scope.filters);
         response.then(function (res) {
             if (!res.isSuccess) {
                 toastr.error(res.message);
             }
             else {
-                $scope.listsalebook = res.data;
+                $scope.listsales = res.data;
+                $scope.sumTotal = $scope.listsales.sum(function (item) {
+                    return parseInt(item.total);
+                });
             }
         });
     };
 
     $scope.validatecontrols = function () {
         return $scope.filters == null || $scope.filters.dateinit == null
-            || $scope.filters.dateend == null || $scope.selectedoffice == null;
+            || $scope.filters.dateend == null || $scope.selecteduser == null;
     };
 
-    $scope.salebookselected = function (salebook) {
-        $scope.selectedsalebook = salebook;
+    $scope.printReport = function () {
+        if (isIE())
+            Print();
+        else
+            setTimeout(function () {
+                window.print();
+            }, 100);
     };
 
-    $scope.deletesalebook = function () {
-        var response = TicketService.invalidateinvoice($scope.selectedsalebook);
-        response.then(function (res) {
-            if (!res.isSuccess) { toastr.error(res.message); }
-            else {
-                $("#modaldeletesalebook").modal("hide");
-                $scope.selectedsalebook = null;
-                $scope.listsalebook = [];
-                toastr.success(res.message);
-            }
-        });
-    };
+    function isIE() {
+        if (navigator.appName == 'Microsoft Internet Explorer' || !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv 11/)) || (typeof $.browser !== "undefined" && $.browser.msie == 1)) {
+            return true;
+        }
+        return false;
+    }
 });

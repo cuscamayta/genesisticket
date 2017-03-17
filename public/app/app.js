@@ -112,6 +112,10 @@ app.config(function ($routeProvider, $httpProvider) {
             controller: 'DailycashController',
             templateUrl: 'app/partials/report/dailycash.html'
         })
+        .when('/dailycashall', {
+            controller: 'DailycashallController',
+            templateUrl: 'app/partials/report/dailycashall.html'
+        })
         .when('/dailysale', {
             controller: 'DailysaleController',
             templateUrl: 'app/partials/report/dailysale.html'

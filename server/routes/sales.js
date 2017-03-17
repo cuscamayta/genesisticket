@@ -4,20 +4,42 @@ var router = express.Router();
 var common = require('./common');
 
 router.post('/dailycash', common.isAuthenticate, function (request, response) {
-    models.Sale.findAll({
-        include: [{ model: models.User }],
-        where: {
-            dateregister: {
-                $between: [common.formatDate(request.body.dateinit), common.formatDate(request.body.dateend)]
+    if (request.body.iduser > 0) {
+        models.Sale.findAll({
+            attributes: ["dateregister", "arrival", "departure", "total"],
+            include: [
+                { model: models.User },
+                { attributes: ["numberinvoice", "numberorder", "fullname", "numberid", "numbercontrol"], model: models.Salesbook, where: { status: 1 } }],
+            where: {
+                dateregister: {
+                    $between: [common.formatDate(request.body.dateinit), common.formatDate(request.body.dateend)]
+                },
+                iduser: request.body.iduser, status: 1
             },
-            iduser: request.body.iduser, status: 1
-        },
-        order: 'idschedule ASC'
-    }).then(function (res) {
-        response.send(common.response(res));
-    }).catch(function (err) {
-        response.send(common.response(err.name, err.message, false));
-    });
+            order: 'Sale.idoffice, idschedule, Sale.dateregister, Sale.iduser, numberinvoice ASC'
+        }).then(function (res) {
+            response.send(common.response(res));
+        }).catch(function (err) {
+            response.send(common.response(err.name, err.message, false));
+        });
+    } else {
+        models.Sale.findAll({
+            attributes: ["dateregister", "arrival", "departure", "total"],
+            include: [
+                { model: models.User },
+                { attributes: ["numberinvoice", "numberorder", "fullname", "numberid", "numbercontrol"], model: models.Salesbook, where: { status: 1 } }],
+            where: {
+                dateregister: {
+                    $between: [common.formatDate(request.body.dateinit), common.formatDate(request.body.dateend)]
+                }, status: 1
+            },
+            order: 'Sale.idoffice, idschedule, Sale.dateregister, Sale.iduser, numberinvoice ASC'
+        }).then(function (res) {
+            response.send(common.response(res));
+        }).catch(function (err) {
+            response.send(common.response(err.name, err.message, false));
+        });
+    }
 });
 
 router.post('/dailybus', common.isAuthenticate, function (request, response) {

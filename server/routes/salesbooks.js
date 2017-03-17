@@ -6,21 +6,36 @@ var nodeExcel = require('excel-export');
 var uuid = require('node-uuid');
 
 router.post('/forselect', common.isAuthenticate, function (request, response) {
-
-    models.Salesbook.findAll({
-        include: [{ model: models.Office }],
-        where: {
-            dateregister: {
-                $between: [common.formatDate(request.body.dateinit), common.formatDate(request.body.dateend)]
+    if (request.body.idoffice > 0) {
+        models.Salesbook.findAll({
+            include: [{ attributes: ["id", "title"], model: models.Office, include: [{ model: models.Useroffice, where: { iduser: request.body.iduser } }] }],
+            where: {
+                dateregister: {
+                    $between: [common.formatDate(request.body.dateinit), common.formatDate(request.body.dateend)]
+                },
+                idoffice: request.body.idoffice
             },
-            idoffice: request.body.idoffice, status: 1
-        },
-        order: 'numberinvoice ASC'
-    }).then(function (res) {
-        response.send(common.response(res));
-    }).catch(function (err) {
-        response.send(common.response(err.name, err.message, false));
-    });
+            order: 'idoffice, numberinvoice ASC'
+        }).then(function (res) {
+            response.send(common.response(res));
+        }).catch(function (err) {
+            response.send(common.response(err.name, err.message, false));
+        });
+    } else {
+        models.Salesbook.findAll({
+            include: [{ attributes: ["id", "title"], model: models.Office, include: [{ model: models.Useroffice, where: { iduser: request.body.iduser } }] }],
+            where: {
+                dateregister: {
+                    $between: [common.formatDate(request.body.dateinit), common.formatDate(request.body.dateend)]
+                },
+            },
+            order: 'idoffice, numberinvoice ASC'
+        }).then(function (res) {
+            response.send(common.response(res));
+        }).catch(function (err) {
+            response.send(common.response(err.name, err.message, false));
+        });
+    }
 });
 
 router.post('/voidedinvoice', common.isAuthenticate, function (request, response) {

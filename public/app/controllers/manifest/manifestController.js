@@ -1,4 +1,4 @@
-app.controller('ManifestController', function($scope, ScheduleService, TravelService, $rootScope) {
+app.controller('ManifestController', function ($scope, ScheduleService, TravelService, $rootScope) {
     init();
 
     function init() {
@@ -16,7 +16,7 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
             singleDatePicker: true,
             showDropdowns: true,
             calender_style: "picker_4"
-        }).on('apply.daterangepicker', function(ev, picker) {
+        }).on('apply.daterangepicker', function (ev, picker) {
             $scope.filter.dateinit = picker.startDate.format('DD/MM/YYYY');
         });
 
@@ -25,7 +25,7 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
             singleDatePicker: true,
             showDropdowns: true,
             calender_style: "picker_4"
-        }).on('apply.daterangepicker', function(ev, picker) {
+        }).on('apply.daterangepicker', function (ev, picker) {
             $scope.filter.dateend = picker.startDate.format('DD/MM/YYYY');
         });
 
@@ -34,7 +34,7 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
 
     function gettravels() {
         var response = TravelService.gettravels();
-        response.then(function(res) {
+        response.then(function (res) {
             if (!res.isSuccess) {
                 toastr.error(res.message);
             }
@@ -49,7 +49,7 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
             $scope.selectedtravel.dateinit = $scope.filter.dateinit;
             $scope.selectedtravel.dateend = $scope.filter.dateend;
             var response = ScheduleService.getschedulesforselect($scope.selectedtravel);
-            response.then(function(res) {
+            response.then(function (res) {
                 if (!res.isSuccess) {
                     toastr.error(res.message);
                 }
@@ -60,20 +60,19 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
         }
     }
 
-    $scope.selectedtravelchange = function() {
+    $scope.selectedtravelchange = function () {
         getschedules();
     };
 
-    $scope.scheduleselected = function(schedule) {
+    $scope.scheduleselected = function (schedule) {
         $scope.selectedschedule = schedule;
 
         var response = ScheduleService.getticketsformanifest($scope.selectedschedule);
-        response.then(function(res) {
+        response.then(function (res) {
             if (!res.isSuccess) {
                 toastr.error(res.message);
             }
             else {
-                debugger;
                 $scope.showblack = false;
                 $scope.listticket = res.data;
                 if ($scope.listticket.length > 0) {
@@ -85,13 +84,13 @@ app.controller('ManifestController', function($scope, ScheduleService, TravelSer
         });
     };
 
-    $scope.back = function() {
+    $scope.back = function () {
         $scope.showblack = true;
         $("#step-2").css("display", "none");
         $("#step-1").css("display", "block");
     };
 
-     $scope.printReport = function () {
+    $scope.printReport = function () {
         if (isIE())
             Print();
         else

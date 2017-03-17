@@ -2,7 +2,7 @@ app.controller('VoidedinvoiceController', function ($scope, SalesbookService, Of
     init();
 
     function init() {
-        
+
         $scope.selectedschedule = null;
         $scope.lissales = [];
 
@@ -22,7 +22,6 @@ app.controller('VoidedinvoiceController', function ($scope, SalesbookService, Of
     }
 
     function getoffices() {
-        debugger;
         $scope.filters.iduser = $rootScope.currentUser.user.id;
         var response = OfficeService.getofficesforselect($scope.filters);
         response.then(function (res) {
